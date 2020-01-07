@@ -1,0 +1,30 @@
+{
+  "name": "newman-contract",
+  "version": "1.0.0",
+  "description": "A helper for contract testing using newman",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": ["lib/**/*"],
+  "scripts": {
+    "build": "tsc",
+    "test": "npm run lint && jest --config jestconfig.json",
+    "lint": "tslint -p tsconfig.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndreiRupertti/newman-contract.git"
+  },
+  "author": "AndreiRupertti",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AndreiRupertti/newman-contract/issues"
+  },
+  "homepage": "https://github.com/AndreiRupertti/newman-contract#readme",
+  "devDependencies": {
+    "@types/jest": "^24.0.25",
+    "jest": "^24.9.0",
+    "ts-jest": "^24.3.0",
+    "tslint": "^5.20.1",
+    "typescript": "^3.7.4"
+  }
+}
