@@ -1,0 +1,46 @@
+{
+  "info": {
+    "name": "Newman Test",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Test 1 ",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "e7dc2878-cf96-4aec-bbcc-7504301f8a47",
+            "exec": [
+              "// Generated Test\n",
+              "const testPipeline = ({ pm }) => {",
+              "                const { test, expect } = pm;",
+              "                test('My dummy test', () => {",
+              "                    expect(1).to.be.eq(1);",
+              "                });",
+              "            }",
+              "",
+              "",
+              "testPipeline({ pm });"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "protocol": "https",
+          "host": [
+            "google",
+            "com"
+          ],
+          "path": [
+            "search"
+          ]
+        }
+      }
+    }
+  ]
+}

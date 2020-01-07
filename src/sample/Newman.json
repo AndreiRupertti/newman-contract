@@ -1,0 +1,19 @@
+{
+	"info": {
+		"name": "Newman",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "newman test",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "google.com",
+
+				}
+			}
+		}
+	]
+}
