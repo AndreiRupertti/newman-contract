@@ -10,18 +10,17 @@
           "listen": "test",
           "script": {
             "exec": [
-              "// Generated Test\n",
+              "// Generated Test",
               "const testPipeline = ({ pm }) => {",
-              "                const { test, expect } = pm;",
+              "                    const { test, expect } = pm;",
               "                test(\"My dummy test\", () => {",
               "                    expect(1).to.be.eq(1);",
               "                });",
               "            }",
-              "",
-              "",
-              "testPipeline({ pm });"
+              "testPipeline({ pm });",
+              ""
             ],
-            "id": "e7dc2878-cf96-4aec-bbcc-7504301f8a47",
+            "id": "4c9c4414-e4ea-4bd2-8444-dffefbf41f0f",
             "type": "text/javascript"
           }
         }

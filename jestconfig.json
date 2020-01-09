@@ -6,6 +6,7 @@
     "moduleFileExtensions": ["ts", "js", "json", "node"],
     "moduleNameMapper": {
       "@src/(.*)$": "<rootDir>/src/$1",
-      "@mappers/(.*)$": "<rootDir>/src/mappers/$1"
+      "@mappers/(.*)$": "<rootDir>/src/mappers/$1",
+      "@tests/(.*)$": "<rootDir>/tests/$1"
     }
   }
