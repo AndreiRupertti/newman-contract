@@ -1,13 +1,20 @@
 {
     "compilerOptions": {
-      "target": "es2015",
+      "target": "es6",
       "module": "commonjs",
       "declaration": true,
       "outDir": "./lib",
       "strict": true,
       "resolveJsonModule": true,
-      "esModuleInterop": true
+      "esModuleInterop": true,
+      "baseUrl": ".",
+      "paths": {
+        "@src/*": ["src/*"],
+        "@mappers/*": ["src/mappers/*"],
+        "@sample/*": ["src/sample/*"],
+        "@types": ["src/types/index"],
+      }
     },
     "include": ["./src"],
-    "exclude": ["node_modules", "tests/"]
+    "exclude": ["node_modules"]
   }

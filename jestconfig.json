@@ -2,5 +2,10 @@
     "transform": {
       "^.+\\.(t|j)sx?$": "ts-jest"
     },
-    "moduleFileExtensions": ["ts", "js", "json", "node"]
+    "rootDir": ".",
+    "moduleFileExtensions": ["ts", "js", "json", "node"],
+    "moduleNameMapper": {
+      "@src/(.*)$": "<rootDir>/src/$1",
+      "@mappers/(.*)$": "<rootDir>/src/mappers/$1"
+    }
   }
