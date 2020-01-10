@@ -1,7 +1,6 @@
-import { IHeader} from "@types";
-import { HeaderDefinition } from "postman-collection";
+import { IParam, IHeader} from "@types";
 
-export default (headers: IHeader): HeaderDefinition[] => {
+export default (headers: IHeader): IParam[] => {
     return Object
         .entries(headers)
         .map(([key, value]) => (

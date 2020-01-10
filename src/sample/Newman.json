@@ -1,19 +1,91 @@
 {
 	"info": {
-		"name": "Newman",
+		"_postman_id": "c9679f3f-f9b8-4694-a887-144449530f10",
+		"name": "Newman Test",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "newman test",
+			"name": "Folder",
+			"item": [
+				{
+					"name": "Request inside folder",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Folder",
+			"item": [
+				{
+					"name": "Request inside folder",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Test 1 ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e7dc2878-cf96-4aec-bbcc-7504301f8a47",
+						"exec": [
+							"// Generated Test",
+							"",
+							"const testPipeline = ({ pm }) => {",
+							"                const { test, expect } = pm;",
+							"                test('My dummy test', () => {",
+							"                    expect(1).to.be.eq(1);",
+							"                });",
+							"            }",
+							"",
+							"",
+							"testPipeline({ pm });"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "X-Device",
+						"value": "vaava",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "google.com",
-
+					"raw": "https://google.com/search",
+					"protocol": "https",
+					"host": [
+						"google",
+						"com"
+					],
+					"path": [
+						"search"
+					]
 				}
-			}
+			},
+			"response": []
 		}
-	]
+	],
+	"protocolProfileBehavior": {}
 }
