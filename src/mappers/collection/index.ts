@@ -1,24 +1,23 @@
-import { PostmanRequestItem, IFolder, IRequestDefinition, IInfo} from "@src/types";
-import buildInfo from "./info";
-import buildFolder from "../folder/folder";
-import buildItem from "./item";
+import buildInfo from "@mappers/collection/info";
+import buildItem from "@mappers/collection/item";
+import buildFolder from "@mappers/folder/folder";
+import { IFolder, IInfo, IPostmanRequestItem, IRequestDefinition} from "@src/types";
 import newman from "newman";
-import { Collection as PostmanCollection } from "postman-collection";
+import getCollectionAsJson from "./collection_json";
 
 interface ICollection {
-    readonly _info: IInfo | {},
-    readonly _item: Array<PostmanRequestItem | IFolder>,
+    readonly _info: IInfo | {};
+    readonly _item: Array<IPostmanRequestItem | IFolder>;
 
-    _getJsonCollection (): PostmanCollection
-
-    addFolder(folderName: string, requests: IRequestDefinition[]): ICollection
-    addRequest(request: IRequestDefinition): ICollection
-    addRequests(request: IRequestDefinition[]): ICollection
-    run(options?: any): void
+    addFolder(folderName: string, requests: IRequestDefinition[]): ICollection;
+    addRequest(request: IRequestDefinition): ICollection;
+    addRequests(request: IRequestDefinition[]): ICollection;
+    toJSON(): any;
+    run(options?: any): void;
 }
 
 interface ICollectionOptions {
-    name: string
+    name: string;
 }
 
 const Collection = ({ name }: ICollectionOptions): ICollection => ({
@@ -31,7 +30,7 @@ const Collection = ({ name }: ICollectionOptions): ICollection => ({
     },
 
     addRequest(request) {
-        this._item.push(buildItem(request))
+        this._item.push(buildItem(request));
         return this;
     },
 
@@ -40,17 +39,16 @@ const Collection = ({ name }: ICollectionOptions): ICollection => ({
         return this;
     },
 
-    _getJsonCollection() {
-        const collection = { info: this._info, item: this._item }
-        return JSON.parse(JSON.stringify(collection));
+    toJSON() {
+        return getCollectionAsJson({ info: this._info, item: this._item}) as any;
     },
 
     run() {
         return newman.run({
-            collection: this._getJsonCollection(),
-            reporters: ["cli"]
+            collection: this.toJSON(),
+            reporters: ["cli"],
         });
-    }
+    },
 });
 
 export default Collection;

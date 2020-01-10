@@ -1,9 +1,9 @@
-import { IRequestDefinition, PostmanRequestItem } from "@types";
 import getHeader from "@mappers/request/header";
 import { getPostmanURL } from "@mappers/request/url";
 import buildEvent, { EventTypes } from "@mappers/script/event";
+import { IPostmanRequestItem, IRequestDefinition } from "@types";
 
-export default ({ name, endpoint, method, test, query, header }: IRequestDefinition): PostmanRequestItem => {
+export default ({ name, endpoint, method, test, query, header }: IRequestDefinition): IPostmanRequestItem => {
     const url = new URL(endpoint);
     return {
         name,
@@ -13,6 +13,6 @@ export default ({ name, endpoint, method, test, query, header }: IRequestDefinit
             header: getHeader(header),
             url: getPostmanURL(url, query),
         },
-        response: []
+        response: [],
     };
 };

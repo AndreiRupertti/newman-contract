@@ -2,7 +2,7 @@ import fs from "fs";
 import Collection from "./mappers/collection";
 import { IRequestDefinition } from "./types";
 
-const navRequests: Array<IRequestDefinition> = [
+const navRequests: IRequestDefinition[] = [
   {
     method: "GET",
     name: "Test 1 ",
@@ -15,12 +15,12 @@ const navRequests: Array<IRequestDefinition> = [
         expect(1).to.be.eq(1);
       });
     },
-  }
-]
-const collection = Collection({ name: 'My Collection'})
+  },
+];
+const collection = Collection({ name: "My Collection"});
 collection
-  .addFolder('Navigation', navRequests)
+  .addFolder("Navigation", navRequests)
   .addRequest(navRequests[0])
   .run();
 
-fs.writeFileSync('src/sample/Newman.postman_collection.json', JSON.stringify(collection._getJsonCollection()))
+fs.writeFileSync("src/sample/Newman.postman_collection.json", JSON.stringify(collection.toJSON()));

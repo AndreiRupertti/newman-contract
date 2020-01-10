@@ -1,23 +1,23 @@
 import { EventTypes } from "@src/mappers/script/event";
+import { expect } from "chai";
 import { UrlDefinition as PostmanURL } from "postman-collection";
-import { expect } from 'chai'
 
 export interface ISimpleObject {
     [key: string]: string;
 }
 
-export type IParam = { key: string, value: string, type?: string }
+export interface IParam { key: string; value: string; type?: string; }
 export type IHeader = ISimpleObject;
 export type IQuery = ISimpleObject;
 
-export interface GlobalPostman {
-    test: typeof test,
-    expect: typeof expect
+export interface IGlobalPostman {
+    test: typeof test;
+    expect: typeof expect;
 }
 
 export interface IInfo {
-    name: string,
-    schema: string
+    name: string;
+    schema: string;
 }
 
 export interface IRequestDefinition {
@@ -26,37 +26,37 @@ export interface IRequestDefinition {
     endpoint: string;
     header?: any;
     query?: any;
-    test: ITestExec
+    test: ITestExec;
 }
 
-export type ITestExec = (params: IExecParams) => void
+export type ITestExec = (params: IExecParams) => void;
 
 export interface IExecParams {
-    pm: GlobalPostman
+    pm: IGlobalPostman;
 }
 
-export interface PostmanRequestItem {
+export interface IPostmanRequestItem {
     name: string;
-    event: Array<IEvent>;
+    event: IEvent[];
     request: {
         method: string;
         header?: IParam[];
         url: PostmanURL;
     };
-    response: []
+    response: [];
 }
 
 export interface IEvent {
-    listen: EventTypes,
+    listen: EventTypes;
     script: {
         exec: string[],
         id: string,
         type: string,
-    },
+    };
 }
 
 export interface IFolder {
     name: string;
-    item: Array<PostmanRequestItem>;
+    item: IPostmanRequestItem[];
 }
 export {};
