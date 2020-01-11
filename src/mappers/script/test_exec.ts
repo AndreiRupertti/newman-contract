@@ -1,4 +1,4 @@
-import { IExecutable } from "./event";
+import { ITestExec } from "@types";
 
 const LINE_BREAK_REGEX = /[\r\n]+/gm;
 
@@ -10,7 +10,7 @@ const testPipeline = ${lines.shift()}\n
 testPipeline({ pm });
 `;
 
-export default (exec: IExecutable) => {
+export default (exec: ITestExec) => {
     const lines = exec.toString().split(LINE_BREAK_REGEX);
     const testTemplate = buildTestTemplate({ lines });
     const executable =  testTemplate.split(LINE_BREAK_REGEX);

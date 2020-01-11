@@ -1,6 +1,7 @@
-import { EventTypes } from "@src/mappers/script/event";
-import { expect } from "chai";
-import { UrlDefinition as PostmanURL } from "postman-collection";
+import { EventTypes } from "@src/constants";
+import { expect as ChaiExpect } from "chai";
+import { test as MochaTest } from "mocha";
+import * as PostmanTypes from "postman-collection";
 
 export interface ISimpleObject {
     [key: string]: string;
@@ -11,8 +12,8 @@ export type IHeader = ISimpleObject;
 export type IQuery = ISimpleObject;
 
 export interface IGlobalPostman {
-    test: typeof test;
-    expect: typeof expect;
+    test: typeof MochaTest;
+    expect: typeof ChaiExpect;
 }
 
 export interface IInfo {
@@ -29,11 +30,15 @@ export interface IRequestDefinition {
     test: ITestExec;
 }
 
-export type ITestExec = (params: IExecParams) => void;
+export type IExecutable = (params: IExecParams) => void;
+export type ITestExec = IExecutable;
 
 export interface IExecParams {
     pm: IGlobalPostman;
 }
+
+export type PostmanCollection = PostmanTypes.Collection;
+export type PostmanURL = PostmanTypes.UrlDefinition;
 
 export interface IPostmanRequestItem {
     name: string;

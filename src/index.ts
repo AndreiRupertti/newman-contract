@@ -1,5 +1,5 @@
 import fs from "fs";
-import Collection from "./mappers/collection";
+import Collection from "./core/base_collection";
 import { IRequestDefinition } from "./types";
 
 const navRequests: IRequestDefinition[] = [

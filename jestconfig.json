@@ -2,11 +2,17 @@
     "transform": {
       "^.+\\.(t|j)sx?$": "ts-jest"
     },
+    "collectCoverageFrom": ["./src/**/*.ts"],
+    "coveragePathIgnorePatterns": ["./src/index.ts"],
     "rootDir": ".",
     "moduleFileExtensions": ["ts", "js", "json", "node"],
     "moduleNameMapper": {
       "@src/(.*)$": "<rootDir>/src/$1",
+      "@core/(.*)$": "<rootDir>/src/core/$1",
+      "@common/(.*)$": "<rootDir>/src/common/$1",
+      "@constants/(.*)$": "<rootDir>/src/constants/$1",
       "@mappers/(.*)$": "<rootDir>/src/mappers/$1",
+      "@types/(.*)$": "<rootDir>/src/types$1",
       "@tests/(.*)$": "<rootDir>/tests/$1"
     }
   }

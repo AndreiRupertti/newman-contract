@@ -1,9 +1,15 @@
-import buildInfo from "@mappers/collection/info";
-import buildItem from "@mappers/collection/item";
-import buildFolder from "@mappers/folder/folder";
-import { IFolder, IInfo, IPostmanRequestItem, IRequestDefinition} from "@src/types";
 import newman from "newman";
-import getCollectionAsJson from "./collection_json";
+import {
+    buildInfo,
+    buildItem,
+    buildFolder,
+} from "@src/mappers";
+import {
+    IFolder,
+    IInfo,
+    IPostmanRequestItem,
+    IRequestDefinition
+} from "@src/types";
 
 interface ICollection {
     readonly _info: IInfo | {};
@@ -22,7 +28,7 @@ interface ICollectionOptions {
 
 const Collection = ({ name }: ICollectionOptions): ICollection => ({
     _info: buildInfo({ name }),
-    _item: [],
+    _item: [] as  Array<IPostmanRequestItem | IFolder>,
 
     addFolder(folderName, requests) {
         this._item.push(buildFolder(folderName, requests));
@@ -34,13 +40,15 @@ const Collection = ({ name }: ICollectionOptions): ICollection => ({
         return this;
     },
 
-    addRequests(request) {
-        this._item.push(...request.map(buildItem));
+    addRequests(requests) {
+        this._item.push(...requests.map(request => buildItem(request)));
         return this;
     },
 
     toJSON() {
-        return getCollectionAsJson({ info: this._info, item: this._item}) as any;
+        return JSON.parse(
+            JSON.stringify({ info: this._info, item: this._item})
+        );
     },
 
     run() {

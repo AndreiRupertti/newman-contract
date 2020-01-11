@@ -1,4 +1,4 @@
-import { IHeader, IParam} from "@types";
+import { IHeader, IParam } from "@types";
 
 export default (headers: IHeader): IParam[] => {
     return Object

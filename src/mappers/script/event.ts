@@ -1,12 +1,7 @@
-import { createUUID } from "@src/common/uuid";
-import buildTest from "./testExec";
-
-export enum EventTypes {
-    PRE_REQUEST = "pre-request",
-    TEST = "test",
-}
-
-export type IExecutable = ({ pm }: any) => void;
+import { createUUID } from "@common/uuid";
+import { IExecutable } from "@types";
+import buildTest from "@mappers/script/test_exec";
+import { EventTypes } from "@src/constants";
 
 const buildExecutableByType = (type: EventTypes, exec: IExecutable) => {
     if (type === EventTypes.TEST) { return buildTest(exec); }
