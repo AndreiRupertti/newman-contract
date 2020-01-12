@@ -1,8 +1,7 @@
-import { IQuery} from "@types";
+import { IQuery, ISimpleObject} from "@types";
 import { QueryParamDefinition } from "postman-collection";
 
-export default (query: IQuery): QueryParamDefinition[] => {
-    return Object
-        .entries(query)
-        .map(([key, value]) => ({ key, value }));
+export default (queryEntries: IQuery | Array<[string, string]>): QueryParamDefinition[] => {
+    const entries =  Array.isArray(queryEntries) ? queryEntries : Object.entries(queryEntries);
+    return entries.map(([key, value]) => ({ key, value }));
 };

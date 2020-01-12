@@ -2,18 +2,28 @@ import buildQuery from "@mappers/request/query";
 import { IQuery, PostmanURL } from "@types";
 
 const mapSearchParamsToQuery = (searchParams: URLSearchParams) => {
-    const params = Array.from(searchParams.entries());
-    return params
-        .map(([key, value]) => ({ key, value }));
+    const queryEntries = Array.from(searchParams.entries());
+    return buildQuery(queryEntries);
 };
 
-const getHost = (host: string) => host ? host.split(".") : undefined;
-const getPath = (pathname: string) => pathname ? pathname.split("/").slice(1) : "";
-const getProtocol = (protocol: string) => protocol ? protocol.replace(":", "") : undefined;
+const getUrlObjectFromEndpoint = (endpoint: string) => {
+    try { return new URL(endpoint); } catch (err) { throw new Error("Invalid endpoint"); }
+};
 
-export default ({ protocol, host, pathname, searchParams }: URL, query?: IQuery): PostmanURL => ({
-    host: getHost(host),
-    path: getPath(pathname),
-    query: query ? buildQuery(query) : mapSearchParamsToQuery(searchParams),
-    protocol: getProtocol(protocol),
-});
+const getHost = (host: string) => host.split(".");
+const getPath = (pathname: string) => pathname.split("/").slice(1);
+const getProtocol = (protocol: string) => protocol.replace(":", "");
+
+interface IUrlOptions {
+    query: IQuery;
+}
+
+export default (endpoint: string, options: Partial<IUrlOptions> = {}): PostmanURL => {
+    const { host, pathname, protocol, searchParams } = getUrlObjectFromEndpoint(endpoint);
+    return {
+        host: getHost(host),
+        path: getPath(pathname),
+        query: options.query ? buildQuery(options.query) : mapSearchParamsToQuery(searchParams),
+        protocol: getProtocol(protocol),
+    };
+};

@@ -1,3 +1,5 @@
+import { EventTypes } from "@src/constants";
+
 const validPostmanDummyExec = [
   "// Generated Test",
   "const testPipeline = ({ pm }) => {",
@@ -10,6 +12,14 @@ const validPostmanDummyExec = [
   ""
 ]
 
+const validPostmanDummyTestEvent = {
+  listen: EventTypes.TEST,
+  script: {
+    exec: validPostmanDummyExec,
+    id: 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx',
+    type: 'text/javascript'
+  }
+}
 const validPostmanGetRequest = {
   header: [{ key: "X-Track-id", type: "text", value: "123456" }],
   method: "GET",
@@ -23,7 +33,7 @@ const validPostmanGetRequest = {
 
 const validPostmanGetRequestItem = {
   name: 'Valid Get Mock',
-  event: validPostmanDummyExec,
+  event: validPostmanDummyTestEvent,
   request: validPostmanGetRequest,
   response: [],
 }
@@ -31,5 +41,6 @@ const validPostmanGetRequestItem = {
 export {
   validPostmanGetRequest,
   validPostmanGetRequestItem,
-  validPostmanDummyExec
+  validPostmanDummyExec,
+  validPostmanDummyTestEvent
 }
