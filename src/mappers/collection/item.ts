@@ -1,8 +1,8 @@
-import { IPostmanRequestItem, IRequestDefinition } from "@types";
-import buildEvent from "@mappers/script/event";
 import buildHeader from "@mappers/request/header";
 import buildUrl from "@mappers/request/url";
+import buildEvent from "@mappers/script/event";
 import { EventTypes } from "@src/constants";
+import { IPostmanRequestItem, IRequestDefinition } from "@types";
 
 export default ({ name, endpoint, method, test, query, header }: IRequestDefinition): IPostmanRequestItem => {
     const url = new URL(endpoint);

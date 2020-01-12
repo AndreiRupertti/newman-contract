@@ -1,7 +1,7 @@
 import { createUUID } from "@common/uuid";
-import { IExecutable } from "@types";
 import buildTest from "@mappers/script/test_exec";
 import { EventTypes } from "@src/constants";
+import { IExecutable } from "@types";
 
 const buildExecutableByType = (type: EventTypes, exec: IExecutable) => {
     if (type === EventTypes.TEST) { return buildTest(exec); }

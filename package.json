@@ -8,10 +8,10 @@
     "lib/**/*"
   ],
   "scripts": {
-    "build": "tsc",
-    "start": "npm run build && ts-node -r tsconfig-paths/register lib/index",
+    "build": "tsc -p src/tsconfig.json",
+    "start": "npm run build && ts-node --project src/tsconfig.json -r tsconfig-paths/register lib/index",
     "test": " jest --config jestconfig.json",
-    "lint": "tslint -p tsconfig.json",
+    "lint": "tslint -p src/tsconfig.json",
     "format": "npm run lint -- --fix"
   },
   "husky": {

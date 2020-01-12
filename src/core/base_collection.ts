@@ -1,15 +1,15 @@
-import newman from "newman";
 import {
+    buildFolder,
     buildInfo,
     buildItem,
-    buildFolder,
 } from "@src/mappers";
 import {
     IFolder,
     IInfo,
     IPostmanRequestItem,
-    IRequestDefinition
+    IRequestDefinition,
 } from "@src/types";
+import newman from "newman";
 
 interface ICollection {
     readonly _info: IInfo | {};
@@ -41,13 +41,13 @@ const Collection = ({ name }: ICollectionOptions): ICollection => ({
     },
 
     addRequests(requests) {
-        this._item.push(...requests.map(request => buildItem(request)));
+        this._item.push(...requests.map((request) => buildItem(request)));
         return this;
     },
 
     toJSON() {
         return JSON.parse(
-            JSON.stringify({ info: this._info, item: this._item})
+            JSON.stringify({ info: this._info, item: this._item}),
         );
     },
 

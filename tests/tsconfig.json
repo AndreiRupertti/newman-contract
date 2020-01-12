@@ -1,8 +1,0 @@
-{
-	"extends": "../tsconfig",
-	"compilerOptions": {
-		"outFile": "./built/test.max.js",
-		"module": "ES6"
-	},
-	"include": ["./"]
-}

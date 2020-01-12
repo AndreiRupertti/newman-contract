@@ -1,5 +1,5 @@
-import { IQuery, PostmanURL } from "@types";
 import buildQuery from "@mappers/request/query";
+import { IQuery, PostmanURL } from "@types";
 
 const mapSearchParamsToQuery = (searchParams: URLSearchParams) => {
     const params = Array.from(searchParams.entries());
