@@ -1,5 +1,5 @@
 import buildQuery from "@mappers/request/query";
-import { IQuery, PostmanURL } from "@types";
+import { IQuery } from "@types";
 
 const mapSearchParamsToQuery = (searchParams: URLSearchParams) => {
     const queryEntries = Array.from(searchParams.entries());
@@ -18,7 +18,7 @@ interface IUrlOptions {
     query: IQuery;
 }
 
-export default (endpoint: string, options: Partial<IUrlOptions> = {}): PostmanURL => {
+export default (endpoint: string, options: Partial<IUrlOptions> = {}) => {
     const { host, pathname, protocol, searchParams } = getUrlObjectFromEndpoint(endpoint);
     return {
         host: getHost(host),

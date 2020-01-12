@@ -3,6 +3,7 @@ import buildItem from "@mappers/collection/item";
 import buildFolder from "@mappers/folder/folder";
 import buildHeader from "@mappers/request/header";
 import buildQuery from "@mappers/request/query";
+import buildRequest from "@mappers/request/request";
 import buildUrl from "@mappers/request/url";
 import buildEvent from "@mappers/script/event";
 import buildTest from "@mappers/script/test_exec";
@@ -16,4 +17,5 @@ export {
     buildHeader,
     buildQuery,
     buildUrl,
+    buildRequest,
 };

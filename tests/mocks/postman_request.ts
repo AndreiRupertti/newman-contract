@@ -20,7 +20,7 @@ const validPostmanDummyTestEvent = {
     type: 'text/javascript'
   }
 }
-const validPostmanGetRequest = {
+const validPostmanRequestGET = {
   header: [{ key: "X-Track-id", type: "text", value: "123456" }],
   method: "GET",
   url: {
@@ -31,16 +31,45 @@ const validPostmanGetRequest = {
   }
 };
 
-const validPostmanGetRequestItem = {
+const validPostmanRequestItemGET = {
   name: 'Valid Get Mock',
   event: validPostmanDummyTestEvent,
-  request: validPostmanGetRequest,
+  request: validPostmanRequestGET,
+  response: [],
+}
+
+const validPostmanRequestPOST = {
+  header: [{ key: "X-Track-id", type: "text", value: "123456" }],
+  method: "POST",
+  body: {
+    mode: "raw",
+    raw: "{\"bodyInfo\":\"someInfo\"}",
+    options: {
+      raw: {
+        language: "json"
+      }
+    }
+  },
+  url: {
+    host: ["some-endpoint", "com"],
+    path: ["search"],
+    protocol: "https",
+    query: [{ key: "q", value: "hello" }]
+  }
+};
+
+const validPostmanRequestItemPOST = {
+  name: 'Valid Get Mock',
+  event: validPostmanDummyTestEvent,
+  request: validPostmanRequestPOST,
   response: [],
 }
 
 export {
-  validPostmanGetRequest,
-  validPostmanGetRequestItem,
+  validPostmanRequestGET as validPostmanGetRequest,
+  validPostmanRequestItemGET as validPostmanGetRequestItem,
+  validPostmanRequestPOST,
+  validPostmanRequestItemPOST,
   validPostmanDummyExec,
   validPostmanDummyTestEvent
 }

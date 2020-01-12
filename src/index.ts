@@ -16,6 +16,20 @@ const navRequests: IRequestDefinition[] = [
       });
     },
   },
+  {
+    method: "POST",
+    name: "Valid POST Mock",
+    endpoint: "w3schools.com/test/demo_form.php",
+    header: { "X-Track-id": "123456"},
+    query: { q: "hello" },
+    body: { name1: "value1", name2: "value2" },
+    test: ({ pm }) => {
+      const { test, expect } = pm;
+      test("My dummy test", () => {
+        expect(1).to.be.eq(1);
+      });
+    },
+},
 ];
 const collection = Collection({ name: "My Collection"});
 collection

@@ -1,37 +1,101 @@
 {
 	"info": {
-		"_postman_id": "c9679f3f-f9b8-4694-a887-144449530f10",
-		"name": "Newman Test",
+		"_postman_id": "ff114595-7b0a-466e-8541-65c53ba98cae",
+		"name": "My Collection",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Folder",
+			"name": "Navigation",
 			"item": [
 				{
-					"name": "Request inside folder",
+					"name": "Test 1 ",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Generated Test",
+									"const testPipeline = ({ pm }) => {",
+									"                const { test, expect } = pm;",
+									"            test(\"My dummy test\", () => {",
+									"                expect(1).to.be.eq(1);",
+									"            });",
+									"        }",
+									"testPipeline({ pm });",
+									""
+								],
+								"id": "57470992-99c8-4e64-8825-f7054289cc01",
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "X-Device",
+								"value": "Mobile-iOS",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": ""
+							"raw": "https://google.com/search?q=Olá",
+							"protocol": "https",
+							"host": [
+								"google",
+								"com"
+							],
+							"path": [
+								"search"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "Olá"
+								}
+							]
 						}
 					},
 					"response": []
-				}
-			],
-			"protocolProfileBehavior": {}
-		},
-		{
-			"name": "Folder",
-			"item": [
+				},
 				{
-					"name": "Request inside folder",
+					"name": "Post Request",
 					"request": {
-						"method": "GET",
-						"header": [],
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Some Key\": \"Some Value\",\n\t\"Boolean\": true,\n\t\"Number\": 1-\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": ""
+							"raw": "https://google.com/search?q=Olá",
+							"protocol": "https",
+							"host": [
+								"google",
+								"com"
+							],
+							"path": [
+								"search"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "Olá"
+								}
+							]
 						}
 					},
 					"response": []
@@ -45,20 +109,18 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "e7dc2878-cf96-4aec-bbcc-7504301f8a47",
 						"exec": [
 							"// Generated Test",
-							"",
 							"const testPipeline = ({ pm }) => {",
 							"                const { test, expect } = pm;",
-							"                test('My dummy test', () => {",
-							"                    expect(1).to.be.eq(1);",
-							"                });",
-							"            }",
-							"",
-							"",
-							"testPipeline({ pm });"
+							"            test(\"My dummy test\", () => {",
+							"                expect(1).to.be.eq(1);",
+							"            });",
+							"        }",
+							"testPipeline({ pm });",
+							""
 						],
+						"id": "b4da1abd-591d-4152-b699-1acb644fb438",
 						"type": "text/javascript"
 					}
 				}
@@ -68,12 +130,12 @@
 				"header": [
 					{
 						"key": "X-Device",
-						"value": "vaava",
+						"value": "Mobile-iOS",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "https://google.com/search",
+					"raw": "https://google.com/search?q=Olá",
 					"protocol": "https",
 					"host": [
 						"google",
@@ -81,6 +143,12 @@
 					],
 					"path": [
 						"search"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "Olá"
+						}
 					]
 				}
 			},

@@ -3,13 +3,19 @@ import { expect as ChaiExpect } from "chai";
 import { test as MochaTest } from "mocha";
 import * as PostmanTypes from "postman-collection";
 
+type Overwrite<T, U> = Pick<T, Exclude<keyof T, keyof U>> & U;
+
 export interface ISimpleObject {
-    [key: string]: string;
+    [key: string]: string | number | boolean | ISimpleObject[] | null;
 }
 
-export interface IParam { key: string; value: string; type?: string; }
+export type IParam = ISimpleObject & { type?: string; };
 export type IHeader = ISimpleObject;
 export type IQuery = ISimpleObject;
+export type IBody = ISimpleObject;
+
+export type IExecutable = (params: IExecParams) => void;
+export type ITestExec = IExecutable;
 
 export interface IGlobalPostman {
     test: typeof MochaTest;
@@ -25,21 +31,18 @@ export interface IRequestDefinition {
     method: string;
     name: string;
     endpoint: string;
-    header?: any;
-    query?: any;
+    header?: IHeader;
+    query?: IQuery;
+    body?: IBody;
     test: ITestExec;
 }
-
-export type IExecutable = (params: IExecParams) => void;
-export type ITestExec = IExecutable;
 
 export interface IExecParams {
     pm: IGlobalPostman;
 }
 
 export type PostmanCollection = PostmanTypes.Collection;
-export type PostmanURL = PostmanTypes.UrlDefinition;
-
+export type PostmanURL = Overwrite<PostmanTypes.UrlDefinition, { query?: ISimpleObject[] }>;
 export interface IPostmanRequestItem {
     name: string;
     event: IEvent[];
