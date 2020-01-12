@@ -1,7 +1,7 @@
 {
   "globals": {
     "ts-jest": {
-      "tsConfig": "tests/tsconfig-tests.json"
+      "tsConfig": "tests/tsconfig.json"
     }
   },
   "transform": {
