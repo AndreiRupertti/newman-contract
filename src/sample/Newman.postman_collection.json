@@ -1,1 +1,186 @@
-{"info":{"name":"My Collection","schema":"https://schema.getpostman.com/json/collection/v2.1.0/collection.json"},"item":[{"name":"Navigation","item":[{"name":"Test 1 ","event":[{"listen":"test","script":{"exec":["// Generated Test","const testPipeline = ({ pm }) => {","                const { test, expect } = pm;","            test(\"My dummy test\", () => {","                expect(1).to.be.eq(1);","            });","        }","testPipeline({ pm });",""],"id":"83968be7-9189-4d8c-ab0d-0082fc138cc8","type":"text/javascript"}}],"request":{"method":"GET","header":[{"key":"X-Device","value":"Mobile-iOS","type":"text"}],"url":{"host":["google","com"],"path":["search"],"query":[{"key":"q","value":"Olá"}],"protocol":"https"}},"response":[]},{"name":"Valid POST Mock","event":[{"listen":"test","script":{"exec":["// Generated Test","const testPipeline = ({ pm }) => {","                const { test, expect } = pm;","            test(\"My dummy test\", () => {","                expect(1).to.be.eq(1);","            });","        }","testPipeline({ pm });",""],"id":"90064958-bb31-4a6f-a9bd-0f28ba4641ac","type":"text/javascript"}}],"request":{"method":"POST","header":[{"key":"X-Track-id","value":"123456","type":"text"}],"body":{"mode":"raw","raw":"{\"name1\":\"value1\",\"name2\":\"value2\"}","options":{"raw":{"language":"json"}}},"url":{"host":["w3schools","com"],"path":["test","demo_form.php"],"query":[{"key":"q","value":"hello"}],"protocol":"http"}},"response":[]}]},{"name":"Test 1 ","event":[{"listen":"test","script":{"exec":["// Generated Test","const testPipeline = ({ pm }) => {","                const { test, expect } = pm;","            test(\"My dummy test\", () => {","                expect(1).to.be.eq(1);","            });","        }","testPipeline({ pm });",""],"id":"510377c1-af6a-4264-8217-ac1dae072151","type":"text/javascript"}}],"request":{"method":"GET","header":[{"key":"X-Device","value":"Mobile-iOS","type":"text"}],"url":{"host":["google","com"],"path":["search"],"query":[{"key":"q","value":"Olá"}],"protocol":"https"}},"response":[]}]}
+{
+    "info": {
+        "name": "My Collection",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Navigation",
+            "item": [
+                {
+                    "name": "Test 1 ",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "// Generated code for: test ",
+                                    "const runTests = ({ pm, myGlobalNumber }) => {",
+                                    "        const { test, expect } = pm;",
+                                    "    test(\"My dummy test\", () => {",
+                                    "        expect(myGlobalNumber).to.be.eq(11);",
+                                    "    });",
+                                    "}",
+                                    "runTests({ pm, myGlobalNumber });",
+                                    ""
+                                ],
+                                "id": "fff693a5-e54f-44c1-99aa-4ae1a6dce98d",
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "X-Device",
+                                "value": "Mobile-iOS",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "host": [
+                                "google",
+                                "com"
+                            ],
+                            "path": [
+                                "search"
+                            ],
+                            "query": [
+                                {
+                                    "key": "q",
+                                    "value": "Olá"
+                                }
+                            ],
+                            "protocol": "https"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Valid POST Mock",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "// Generated code for: test ",
+                                    "const runTests = ({ pm }) => {",
+                                    "        const { test, expect } = pm;",
+                                    "    test(\"My dummy test\", () => {",
+                                    "        expect(1).to.be.eq(1);",
+                                    "    });",
+                                    "}",
+                                    "runTests({ pm, myGlobalNumber });",
+                                    ""
+                                ],
+                                "id": "ffd38dd6-504e-4af3-8a20-5a7a5e961080",
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "X-Track-id",
+                                "value": "123456",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"name1\": \"value1\",\n  \"name2\": \"value2\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "host": [
+                                "w3schools",
+                                "com"
+                            ],
+                            "path": [
+                                "test",
+                                "demo_form"
+                            ],
+                            "query": [
+                                {
+                                    "key": "q",
+                                    "value": "hello"
+                                }
+                            ],
+                            "protocol": "https"
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Test 1 ",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "// Generated code for: test ",
+                            "const runTests = ({ pm, myGlobalNumber }) => {",
+                            "        const { test, expect } = pm;",
+                            "    test(\"My dummy test\", () => {",
+                            "        expect(myGlobalNumber).to.be.eq(11);",
+                            "    });",
+                            "}",
+                            "runTests({ pm, myGlobalNumber });",
+                            ""
+                        ],
+                        "id": "7a4bf60e-7320-42bb-9231-4ea88ad7d645",
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "X-Device",
+                        "value": "Mobile-iOS",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "host": [
+                        "google",
+                        "com"
+                    ],
+                    "path": [
+                        "search"
+                    ],
+                    "query": [
+                        {
+                            "key": "q",
+                            "value": "Olá"
+                        }
+                    ],
+                    "protocol": "https"
+                }
+            },
+            "response": []
+        }
+    ],
+    "event": [
+        {
+            "listen": "prerequest",
+            "script": {
+                "exec": [
+                    "myGlobalNumber = 10 ",
+                    ""
+                ],
+                "id": "4b1d0680-6506-4793-a628-2039d9897002",
+                "type": "text/javascript"
+            }
+        }
+    ]
+}

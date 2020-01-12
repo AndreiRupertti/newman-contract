@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "ff114595-7b0a-466e-8541-65c53ba98cae",
+		"_postman_id": "4d145609-6b88-433f-8d61-3bad35ed23a8",
 		"name": "My Collection",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -14,6 +14,7 @@
 						{
 							"listen": "test",
 							"script": {
+								"id": "83968be7-9189-4d8c-ab0d-0082fc138cc8",
 								"exec": [
 									"// Generated Test",
 									"const testPipeline = ({ pm }) => {",
@@ -23,9 +24,29 @@
 									"            });",
 									"        }",
 									"testPipeline({ pm });",
-									""
+									"",
+									"const { BrokenContractError } = utils",
+									"new BrokenContractError();"
 								],
-								"id": "57470992-99c8-4e64-8825-f7054289cc01",
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "9b57db76-aefc-480e-add4-91b9735a56af",
+								"exec": [
+									"const utils = {",
+									"    BrokenContractError: class extends Error {",
+									"        constructor() {",
+									"            super();",
+									"            this.title = 'Error'",
+									"        }",
+									"    }",
+									"}",
+									"",
+									"pm.environment.set('utils', utils);"
+								],
 								"type": "text/javascript"
 							}
 						}
@@ -60,20 +81,39 @@
 					"response": []
 				},
 				{
-					"name": "Post Request",
+					"name": "Valid POST Mock",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Generated Test",
+									"const testPipeline = ({ pm }) => {",
+									"                const { test, expect } = pm;",
+									"            test(\"My dummy test\", () => {",
+									"                expect(1).to.be.eq(1);",
+									"            });",
+									"        }",
+									"testPipeline({ pm });",
+									""
+								],
+								"id": "90064958-bb31-4a6f-a9bd-0f28ba4641ac",
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [
 							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
+								"key": "X-Track-id",
+								"value": "123456",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"Some Key\": \"Some Value\",\n\t\"Boolean\": true,\n\t\"Number\": 1-\n}",
+							"raw": "{\"name1\":\"value1\",\"name2\":\"value2\"}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -81,19 +121,20 @@
 							}
 						},
 						"url": {
-							"raw": "https://google.com/search?q=Olá",
-							"protocol": "https",
+							"raw": "http://w3schools.com/test/demo_form.php?q=hello",
+							"protocol": "http",
 							"host": [
-								"google",
+								"w3schools",
 								"com"
 							],
 							"path": [
-								"search"
+								"test",
+								"demo_form.php"
 							],
 							"query": [
 								{
 									"key": "q",
-									"value": "Olá"
+									"value": "hello"
 								}
 							]
 						}
@@ -120,7 +161,7 @@
 							"testPipeline({ pm });",
 							""
 						],
-						"id": "b4da1abd-591d-4152-b699-1acb644fb438",
+						"id": "510377c1-af6a-4264-8217-ac1dae072151",
 						"type": "text/javascript"
 					}
 				}
@@ -153,6 +194,38 @@
 				}
 			},
 			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "840a8026-8432-453e-9ab4-11212db11a77",
+				"type": "text/javascript",
+				"exec": [
+					"// utils = {",
+					"    ",
+					"// }"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "52667f69-bb9c-40de-93ad-6122c67d63f5",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "e3a8f7a2-fe29-4a79-994a-c58866c76063",
+			"key": "Collection variable",
+			"value": "Value",
+			"type": "string"
 		}
 	],
 	"protocolProfileBehavior": {}

@@ -1,21 +1,38 @@
 import { EventTypes } from "@src/constants";
 
-const validPostmanDummyExec = [
-  "// Generated Test",
-  "const testPipeline = ({ pm }) => {",
+const validPostmanDummyTestExec = [
+  "// Generated code for: test ",
+  "const runTests = ({ pm }) => {",
   "        const { test, expect } = pm;",
   "    test(\"My dummy test\", () => {",
   "        expect(1).to.be.eq(1);",
   "    });",
   "}",
-  "testPipeline({ pm });",
+  "runTests({ pm });",
+  ""
+]
+const validPostmanDummyPreRequestExec = [
+  "// Generated code for: prerequest ",
+  "const preRequestSetup = ({ pm }) => {",
+  "        pm.setGlobalVariable('key', 'value');",
+  "}",
+  "preRequestSetup({ pm });",
   ""
 ]
 
 const validPostmanDummyTestEvent = {
   listen: EventTypes.TEST,
   script: {
-    exec: validPostmanDummyExec,
+    exec: validPostmanDummyTestExec,
+    id: 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx',
+    type: 'text/javascript'
+  }
+}
+
+const validPostmanDummyPreRequestEvent = {
+  listen: EventTypes.PRE_REQUEST,
+  script: {
+    exec: validPostmanDummyPreRequestExec,
     id: 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx',
     type: 'text/javascript'
   }
@@ -66,10 +83,12 @@ const validPostmanRequestItemPOST = {
 }
 
 export {
-  validPostmanRequestGET as validPostmanGetRequest,
-  validPostmanRequestItemGET as validPostmanGetRequestItem,
+  validPostmanRequestGET,
+  validPostmanRequestItemGET,
   validPostmanRequestPOST,
   validPostmanRequestItemPOST,
-  validPostmanDummyExec,
-  validPostmanDummyTestEvent
+  validPostmanDummyTestExec,
+  validPostmanDummyTestEvent,
+  validPostmanDummyPreRequestExec,
+  validPostmanDummyPreRequestEvent,
 }

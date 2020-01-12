@@ -1,7 +1,8 @@
 import buildItem from "@mappers/collection/item";
 import { IRequestDefinition } from "@types";
 
-export default (folderName: string, requests: IRequestDefinition[]) => ({
+interface IFolderParams<T> { folderName: string; requests: Array<IRequestDefinition<T>>; globals?: T; }
+export default <T> ({ folderName, requests, globals}: IFolderParams<T>) => ({
     name: folderName,
-    item: requests.map(buildItem),
+    item: requests.map((request) => buildItem(request, globals)),
 });

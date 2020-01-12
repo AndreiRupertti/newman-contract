@@ -1,18 +1,18 @@
 import { createUUID } from "@common/uuid";
-import buildTest from "@mappers/script/test_exec";
 import { EventTypes } from "@src/constants";
+import buildExec from "@src/mappers/script/exec";
 import { IExecutable } from "@types";
 
-const buildExecutableByType = (type: EventTypes, exec: IExecutable) => {
-    if (type === EventTypes.TEST) { return buildTest(exec); }
+interface IEventParams<T> {
+    type: EventTypes;
+    exec: IExecutable<T>;
+    globals?: T;
+}
 
-    return buildTest(exec);
-};
-
-export default (type: EventTypes, exec: IExecutable) => ({
+export default <T> ({ type, exec, globals }: IEventParams<T>) => ({
     listen: type,
     script: {
-        exec: buildExecutableByType(type, exec),
+        exec: buildExec({ type, exec, globals }),
         id: createUUID(),
         type: "text/javascript",
     },

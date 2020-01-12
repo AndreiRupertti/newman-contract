@@ -1,6 +1,6 @@
 import buildItem from '@mappers/collection/item'
 import { validRequestGET, validRequestPOST } from '@tests/mocks/input_request';
-import { validPostmanDummyTestEvent, validPostmanGetRequest } from '@tests/mocks/postman_request';
+import { validPostmanDummyTestEvent, validPostmanRequestGET } from '@tests/mocks/postman_request';
 import { EventTypes } from '@src/constants';
 import { buildRequest, buildEvent } from '@src/mappers';
 
@@ -11,7 +11,7 @@ jest.mock('@mappers/script/event', () => ({
 
 jest.mock('@mappers/request/request', () => ({
     __esModule: true,
-    default: jest.fn(() => validPostmanGetRequest)
+    default: jest.fn(() => validPostmanRequestGET)
 }))
 
 describe('Mapper for Collection item', () => {
@@ -21,14 +21,14 @@ describe('Mapper for Collection item', () => {
         expect(buildItem(validRequestGET)).toEqual({
             name: 'Valid Get Mock',
             event: [validPostmanDummyTestEvent],
-            request: validPostmanGetRequest,
+            request: validPostmanRequestGET,
             response: []
         });
     })
 
     it('should call buildEvent with type test and executable', () => {
         buildItem(validRequestGET)
-        expect(buildEvent).toBeCalledWith(EventTypes.TEST, validRequestGET.test);
+        expect(buildEvent).toBeCalledWith({ type: EventTypes.TEST, exec: validRequestGET.test});
     })
 
     it('should call buildRequest with GET request items', () => {
@@ -51,12 +51,4 @@ describe('Mapper for Collection item', () => {
             "query": validRequestPOST.query
         });
     })
-
-    // it('should call buildUrl with endpoint and options params', () => {
-    //     buildItem(validRequestGET)
-    //     expect(buildUrl).toBeCalledWith(
-    //         validRequestGET.endpoint,
-    //         { query: validRequestGET.query }
-    //     );
-    // })
 })

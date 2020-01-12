@@ -1,13 +1,13 @@
 import { EventTypes } from '@src/constants/index'
-import { buildEvent } from '@src/mappers/index'
+import { buildEvent, buildExec } from '@src/mappers'
 import mochaMock from '@tests/mocks/mocha';
-import { dummyTestExec } from '@tests/mocks/input_request';
-import { validPostmanDummyExec } from '@tests/mocks/postman_request';
+import { dummyTestExec, dummyPreRequestExec } from '@tests/mocks/input_request';
+import { validPostmanDummyTestExec, validPostmanDummyPreRequestExec } from '@tests/mocks/postman_request';
 import * as uuid from '@common/uuid'
 
-jest.mock("@mappers/script/test_exec", () => ({
+jest.mock("@mappers/script/exec", () => ({
     __esModule: true,
-    default: jest.fn(() => validPostmanDummyExec)
+    default: jest.fn(() => validPostmanDummyTestExec)
 }))
 
 const fakeUUID = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'
@@ -19,7 +19,7 @@ describe('Mapper to build Event', () => {
     beforeEach(jest.clearAllMocks)
 
     it('should build event object correctly', () => {
-        const event = buildEvent(EventTypes.TEST, dummyTestExec);
+        const event = buildEvent({ type: EventTypes.TEST, exec: dummyTestExec });
         expect(event.listen).toEqual(EventTypes.TEST);
         expect(event.script).toHaveProperty('exec', expect.any(Array));
         expect(event.script).toHaveProperty('id', fakeUUID);
@@ -27,18 +27,29 @@ describe('Mapper to build Event', () => {
     })
 
     it('should build postman test script correctly', () => {
-        const { script } = buildEvent(EventTypes.TEST, dummyTestExec)
+        const { script } = buildEvent({ type: EventTypes.TEST, exec: dummyTestExec })
         const pm = { ...mochaMock() }
         eval(script.exec.join('\n'));
 
+        expect(buildExec).toBeCalledWith({ type: EventTypes.TEST, exec: dummyTestExec })
         expect(pm.test).toBeCalledWith('My dummy test', expect.any(Function))
         expect(pm.expect).toBeCalledWith(1)
         expect(pm._mock.to.be.eq).toBeCalledWith(1)
     })
+
+    it('should build postman test script correctly', () => {
+        (buildExec as jest.Mock).mockReturnValueOnce(validPostmanDummyPreRequestExec)
+        const { script } = buildEvent({ type: EventTypes.PRE_REQUEST, exec: dummyPreRequestExec })
+        const pm = { ...mochaMock(), setGlobalVariable: jest.fn() }
+        eval(script.exec.join('\n'));
+        
+        expect(buildExec).toBeCalledWith({ type: EventTypes.PRE_REQUEST, exec: dummyPreRequestExec })
+        expect(pm.setGlobalVariable).toBeCalled()
+    })
     
     describe('With invalid type', () => {
         it('should build event with test as default type', () => {
-            const { script } = buildEvent(null as any, dummyTestExec)
+            const { script } = buildEvent({ type: undefined as any, exec: dummyTestExec })
             const pm = { ...mochaMock() }
             eval(script.exec.join('\n'));
     

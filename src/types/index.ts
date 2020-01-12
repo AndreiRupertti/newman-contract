@@ -14,12 +14,13 @@ export type IHeader = ISimpleObject;
 export type IQuery = ISimpleObject;
 export type IBody = ISimpleObject;
 
-export type IExecutable = (params: IExecParams) => void;
-export type ITestExec = IExecutable;
+export type IExecutable<T = {}> = (params: IExecParams<T>) => void;
+export type ITestExec<T = {}> = IExecutable<T>;
 
 export interface IGlobalPostman {
     test: typeof MochaTest;
     expect: typeof ChaiExpect;
+    setGlobalVariable: (key: string, value: any) => void;
 }
 
 export interface IInfo {
@@ -27,19 +28,19 @@ export interface IInfo {
     schema: string;
 }
 
-export interface IRequestDefinition {
+export interface IRequestDefinition<T = {}> {
     method: string;
     name: string;
     endpoint: string;
     header?: IHeader;
     query?: IQuery;
     body?: IBody;
-    test: ITestExec;
+    test: ITestExec<T>;
 }
 
-export interface IExecParams {
-    pm: IGlobalPostman;
-}
+export type IExecParams<T = {}> = T & {
+    pm: IGlobalPostman,
+};
 
 export type PostmanCollection = PostmanTypes.Collection;
 export type PostmanURL = Overwrite<PostmanTypes.UrlDefinition, { query?: ISimpleObject[] }>;

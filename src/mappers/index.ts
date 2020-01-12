@@ -6,16 +6,18 @@ import buildQuery from "@mappers/request/query";
 import buildRequest from "@mappers/request/request";
 import buildUrl from "@mappers/request/url";
 import buildEvent from "@mappers/script/event";
-import buildTest from "@mappers/script/test_exec";
+import buildExec from "@src/mappers/script/exec";
+import buildGlobalSetterEvent from "@src/mappers/script/globals_setter";
 
 export {
     buildInfo,
     buildItem,
     buildEvent,
-    buildTest,
+    buildExec,
     buildFolder,
     buildHeader,
     buildQuery,
     buildUrl,
     buildRequest,
+    buildGlobalSetterEvent,
 };

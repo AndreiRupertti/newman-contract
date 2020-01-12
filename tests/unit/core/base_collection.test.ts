@@ -1,12 +1,13 @@
 import { validRequestGET, validRequestPOST } from '@tests/mocks/input_request';
-import { validPostmanGetRequestItem } from '@tests/mocks/postman_request';
+import { validPostmanRequestItemGET, validPostmanDummyPreRequestExec, validPostmanDummyPreRequestEvent } from '@tests/mocks/postman_request';
 import * as mappers from '@src/mappers';
 import BaseCollection from '@src/core/base_collection'
 
 jest.mock('@src/mappers', () => ({
     buildInfo: jest.fn(options => options),
-    buildItem: jest.fn().mockReturnValue(validPostmanGetRequestItem),
-    buildFolder: jest.fn()
+    buildItem: jest.fn().mockReturnValue(validPostmanRequestItemGET),
+    buildFolder: jest.fn(),
+    buildGlobalSetterEvent: jest.fn(),
 }));
 
 describe('Base Collection', () => {
@@ -23,8 +24,8 @@ describe('Base Collection', () => {
         it('should buildRequest and push to item list', () => {
             const collection = BaseCollection({ name: 'Base collection'})
             collection.addRequest(validRequestGET)
-            expect(mappers.buildItem).toBeCalledWith(validRequestGET)
-            expect(collection._item).toContainEqual(validPostmanGetRequestItem)
+            expect(mappers.buildItem).toBeCalledWith(validRequestGET, null)
+            expect(collection._item).toContainEqual(validPostmanRequestItemGET)
         });
     })
     
@@ -33,8 +34,8 @@ describe('Base Collection', () => {
         it('should buildRequest and push to item list', () => {
             const collection = BaseCollection({ name: 'Base collection'})
             collection.addRequests([validRequestGET, validRequestPOST])
-            expect(mappers.buildItem).nthCalledWith(1, validRequestGET)
-            expect(mappers.buildItem).nthCalledWith(2, validRequestPOST)
+            expect(mappers.buildItem).nthCalledWith(1, validRequestGET, null)
+            expect(mappers.buildItem).nthCalledWith(2, validRequestPOST, null)
             expect(collection._item).toHaveLength(2)
         });
 
@@ -58,7 +59,8 @@ describe('Base Collection', () => {
             expect(collectionJson).toBeDefined();
             expect(JSON.stringify).toBeCalledWith({
                 info: { name: 'Base collection' },
-                item: [validPostmanGetRequestItem]
+                item: [validPostmanRequestItemGET],
+                event: [],
             })
             expect(JSON.parse).toBeCalledWith(expect.any(String))
         });
@@ -74,7 +76,48 @@ describe('Base Collection', () => {
         it('should build folder with name and its requests', () => {
             const collection = BaseCollection({ name: 'Base collection'})
             collection.addFolder('/folder', [validRequestGET, validRequestPOST])
-            expect(mappers.buildFolder).toBeCalledWith('/folder', [validRequestGET, validRequestPOST])
+            expect(mappers.buildFolder).toBeCalledWith({
+                folderName: '/folder',
+                requests: [validRequestGET, validRequestPOST],
+                globals: null,
+            })
         });
     });
+
+    describe('When setting globals', () => {
+        it('Should set _globals with parameter', () => {
+            const collection = BaseCollection({ name: 'Base collection'})
+            collection.setGlobals({ 'key': 'value' })
+            expect(collection._globals).toEqual({ 'key': 'value' })
+        });
+
+        it('Should build event for globals setting', () => {
+            const collection = BaseCollection({ name: 'Base collection'})
+            collection.setGlobals({ 'key': 'value' })
+            expect(mappers.buildGlobalSetterEvent).toBeCalledWith({ 'key': 'value' })
+        });
+    });
+
+    describe('With globals setted', () => {
+        it('Should send globals when building item', () => {
+            const collection = BaseCollection({ name: 'Base collection'})
+            collection.setGlobals({ 'key': 'value' })
+            collection.addRequest(validRequestGET)
+            expect(mappers.buildItem).toBeCalledWith(validRequestGET, { 'key': 'value' })
+        });
+
+        it('Should send globals when building folder', () => {
+            const collection = BaseCollection({ name: 'Base collection'})
+            collection.setGlobals({ 'key': 'value' })
+            collection.addFolder('/folder-name', [validRequestGET])
+            expect(mappers.buildFolder).toBeCalledWith({
+                folderName: '/folder-name',
+                requests: [validRequestGET],
+                globals: { 'key': 'value' }
+            });
+        });
+
+    });
+
+
 })

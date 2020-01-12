@@ -7,6 +7,10 @@ const dummyTestExec: ITestExec = ({ pm }) => {
     })
 };
 
+const dummyPreRequestExec: ITestExec = ({ pm }) => {
+    pm.setGlobalVariable('key', 'value');
+};
+
 const validRequestGET = {
     method: "GET",
     name: "Valid Get Mock",
@@ -29,5 +33,6 @@ const validRequestPOST = {
 export {
     validRequestPOST,
     validRequestGET,
-    dummyTestExec
+    dummyTestExec,
+    dummyPreRequestExec
 }
