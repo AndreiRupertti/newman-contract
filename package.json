@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A helper for contract testing using newman",
   "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "types": "lib/types/index.d.ts",
   "files": [
     "lib/**/*"
   ],
@@ -24,6 +24,16 @@
     "type": "git",
     "url": "git+https://github.com/AndreiRupertti/newman-contract.git"
   },
+  "keywords": [
+    "contract",
+    "newman",
+    "newman-contract",
+    "contract-testing",
+    "api-testing",
+    "postman",
+    "postman-testing",
+    "postman-contract"
+  ],
   "author": "AndreiRupertti",
   "license": "ISC",
   "bugs": {
