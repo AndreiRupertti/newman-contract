@@ -1,4 +1,5 @@
 import { EventTypes } from "@src/constants";
+import { BrokenContractError } from "@src/core/contract/utils";
 import { expect as ChaiExpect } from "chai";
 import { test as MochaTest } from "mocha";
 import * as PostmanTypes from "postman-collection";
@@ -20,6 +21,9 @@ export type ITestExec<T = {}> = IExecutable<T>;
 export interface IGlobalPostman {
     test: typeof MochaTest;
     expect: typeof ChaiExpect;
+    variables: PostmanTypes.VariableScope;
+    request: any;
+    response: { json: () => any };
     setGlobalVariable: (key: string, value: any) => void;
 }
 
@@ -35,7 +39,9 @@ export interface IRequestDefinition<T = {}> {
     header?: IHeader;
     query?: IQuery;
     body?: IBody;
-    test: ITestExec<T>;
+    test?: IExecutable<T>;
+    preRequest?: IExecutable<T>;
+    schema?: any;
 }
 
 export type IExecParams<T = {}> = T & {
@@ -68,4 +74,27 @@ export interface IFolder {
     name: string;
     item: IPostmanRequestItem[];
 }
-export {};
+
+export interface ICollection<T = {}> {
+    readonly _info: IInfo | {};
+    _item: Array<IPostmanRequestItem | IFolder>;
+    _globals: T | null;
+    _globals_setter_event: IEvent[];
+
+    setGlobals(globals: T): ICollection<T>;
+    addFolder(folderName: string, requests: Array<IRequestDefinition<T>>): ICollection<T>;
+    addRequest(request: IRequestDefinition<T>): ICollection<T>;
+    addRequests(request: Array<IRequestDefinition<T>>): ICollection<T>;
+    toJSON(): any;
+    run(options?: any): void;
+}
+
+export type IContractGlobals<T = {}> = T & {
+    contractUtils: {
+        BrokenContractError: typeof BrokenContractError,
+    },
+};
+
+export interface ICollectionOptions {
+    name: string;
+}

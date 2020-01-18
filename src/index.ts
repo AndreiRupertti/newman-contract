@@ -1,46 +1,269 @@
 import fs from "fs";
-import Collection from "./core/base_collection";
-import { IRequestDefinition, ITestExec } from "./types";
+import ContractCollection from "./core/contract/collection";
+import ContractDefinition from "./core/contract/definition";
 
-interface IGlobal { myGlobalNumber: number; }
-const DummyTestWithGlobal: ITestExec<IGlobal> = ({ pm, myGlobalNumber }) => {
-  const { test, expect } = pm;
-  test("My dummy test", () => {
-    expect(myGlobalNumber).to.be.eq(10);
-  });
+const schema = {
+  definitions: {},
+  $schema: "http://json-schema.org/draft-07/schema#",
+  $id: "http://example.com/root.json",
+  type: "object",
+  title: "The Root Schema",
+  required: [
+    "_id",
+    "index",
+    "name",
+    "desc",
+    "higher_level",
+    "page",
+    "range",
+    "components",
+    "material",
+    "ritual",
+    "duration",
+    "concentration",
+    "casting_time",
+    "level",
+    "school",
+    "classes",
+    "subclasses",
+    "url",
+  ],
+  properties: {
+    _id: {
+      $id: "#/properties/_id",
+      type: "string",
+      title: "The _id Schema",
+      default: "",
+      examples: ["5e1a94a90b1bb138c5c1431d"],
+      pattern: "^(.*)$",
+    },
+    index: {
+      $id: "#/properties/index",
+      type: "string",
+      title: "The Index Schema",
+      default: "",
+      examples: ["acid-arrow"],
+      pattern: "^(.*)$",
+    },
+    name: {
+      $id: "#/properties/name",
+      type: "string",
+      title: "The Name Schema",
+      default: "",
+      examples: ["Acid Arrow"],
+      pattern: "^(.*)$",
+    },
+    desc: {
+      $id: "#/properties/desc",
+      type: "array",
+      title: "The Desc Schema",
+      items: {
+        $id: "#/properties/desc/items",
+        type: "string",
+        title: "The Items Schema",
+        default: "",
+        examples: [
+          "A shimmering green arrow streaks toward a target within range and bursts in a spray of acid. Make a ranged spell attack against the target. On a hit, the target takes 4d4 acid damage immediately and 2d4 acid damage at the end of its next turn. On a miss, the arrow splashes the target with acid for half as much of the initial damage and no damage at the end of its next turn.",
+        ],
+        pattern: "^(.*)$",
+      },
+    },
+    higher_level: {
+      $id: "#/properties/higher_level",
+      type: "array",
+      title: "The Higher_level Schema",
+      items: {
+        $id: "#/properties/higher_level/items",
+        type: "string",
+        title: "The Items Schema",
+        default: "",
+        examples: [
+          "When you cast this spell using a spell slot of 3rd level or higher, the damage (both initial and later) increases by 1d4 for each slot level above 2nd.",
+        ],
+        pattern: "^(.*)$",
+      },
+    },
+    page: {
+      $id: "#/properties/page",
+      type: "string",
+      title: "The Page Schema",
+      default: "",
+      examples: ["phb 259"],
+      pattern: "^(.*)$",
+    },
+    range: {
+      $id: "#/properties/range",
+      type: "string",
+      title: "The Range Schema",
+      default: "",
+      examples: ["90 feet"],
+      pattern: "^(.*)$",
+    },
+    components: {
+      $id: "#/properties/components",
+      type: "array",
+      title: "The Components Schema",
+      items: {
+        $id: "#/properties/components/items",
+        type: "string",
+        title: "The Items Schema",
+        default: "",
+        examples: ["V", "S", "M"],
+        pattern: "^(.*)$",
+      },
+    },
+    material: {
+      $id: "#/properties/material",
+      type: "string",
+      title: "The Material Schema",
+      default: "",
+      examples: ["Powdered rhubarb leaf and an adder's stomach."],
+      pattern: "^(.*)$",
+    },
+    ritual: {
+      $id: "#/properties/ritual",
+      type: "boolean",
+      title: "The Ritual Schema",
+      default: false,
+      examples: [false],
+    },
+    duration: {
+      $id: "#/properties/duration",
+      type: "string",
+      title: "The Duration Schema",
+      default: "",
+      examples: ["Instantaneous"],
+      pattern: "^(.*)$",
+    },
+    concentration: {
+      $id: "#/properties/concentration",
+      type: "boolean",
+      title: "The Concentration Schema",
+      default: false,
+      examples: [false],
+    },
+    casting_time: {
+      $id: "#/properties/casting_time",
+      type: "string",
+      title: "The Casting_time Schema",
+      default: "",
+      examples: ["1 action"],
+      pattern: "^(.*)$",
+    },
+    level: {
+      $id: "#/properties/level",
+      type: "integer",
+      title: "The Level Schema",
+      default: 0,
+      examples: [2],
+    },
+    school: {
+      $id: "#/properties/school",
+      type: "object",
+      title: "The School Schema",
+      required: ["name", "url"],
+      properties: {
+        name: {
+          $id: "#/properties/school/properties/name",
+          type: "string",
+          title: "The Name Schema",
+          default: "",
+          examples: ["Evocation"],
+          pattern: "^(.*)$",
+        },
+        url: {
+          $id: "#/properties/school/properties/url",
+          type: "string",
+          title: "The Url Schema",
+          default: "",
+          examples: ["/api/magic-schools/evocation"],
+          pattern: "^(.*)$",
+        },
+      },
+    },
+    classes: {
+      $id: "#/properties/classes",
+      type: "array",
+      title: "The Classes Schema",
+      items: {
+        $id: "#/properties/classes/items",
+        type: "object",
+        title: "The Items Schema",
+        required: ["name", "url"],
+        properties: {
+          name: {
+            $id: "#/properties/classes/items/properties/name",
+            type: "string",
+            title: "The Name Schema",
+            default: "",
+            examples: ["Wizard"],
+            pattern: "^(.*)$",
+          },
+          url: {
+            $id: "#/properties/classes/items/properties/url",
+            type: "string",
+            title: "The Url Schema",
+            default: "",
+            examples: ["/api/classes/wizard"],
+            pattern: "^(.*)$",
+          },
+        },
+      },
+    },
+    subclasses: {
+      $id: "#/properties/subclasses",
+      type: "array",
+      title: "The Subclasses Schema",
+      items: {
+        $id: "#/properties/subclasses/items",
+        type: "object",
+        title: "The Items Schema",
+        required: ["name", "url"],
+        properties: {
+          name: {
+            $id: "#/properties/subclasses/items/properties/name",
+            type: "string",
+            title: "The Name Schema",
+            default: "",
+            examples: ["Lore"],
+            pattern: "^(.*)$",
+          },
+          url: {
+            $id: "#/properties/subclasses/items/properties/url",
+            type: "string",
+            title: "The Url Schema",
+            default: "",
+            examples: ["/api/subclasses/lore"],
+            pattern: "^(.*)$",
+          },
+        },
+      },
+    },
+    url: {
+      $id: "#/properties/subclasses/items/properties/url",
+      type: "string",
+      title: "The Url Schema",
+      default: "",
+      examples: ["/api/subclasses/lore"],
+      pattern: "^(.*)$",
+    },
+  },
+  additionalProperties: false,
 };
 
-const DummyTest: ITestExec = ({ pm }) => {
-  const { test, expect } = pm;
-  test("My dummy test", () => {
-    expect(1).to.be.eq(1);
-  });
-};
-
-const navRequests: Array<IRequestDefinition<IGlobal>> = [
-  {
+const navRequests = [
+  ContractDefinition({
     method: "GET",
     name: "Test 1 ",
-    endpoint: "https://google.com/search",
-    header: { "X-Device": "Mobile-iOS"},
-    query: { q: "Olá" },
-    test: DummyTestWithGlobal,
-  },
-  {
-    method: "POST",
-    name: "Valid POST Mock",
-    endpoint: "https://w3schools.com/test/demo_form",
-    header: { "X-Track-id": "123456"},
-    query: { q: "hello" },
-    body: { name1: "value1", name2: "value2" },
-    test: DummyTest,
-},
+    endpoint:
+      "http://dnd5eapi.co/api/spells/acid-arrow",
+    schema,
+  }),
 ];
-const collection = Collection<IGlobal>({ name: "My Collection"});
-collection
-  .setGlobals({ myGlobalNumber: 10 })
-  .addFolder("Navigation", navRequests)
-  .addRequest(navRequests[0])
-  .run();
+const collection = ContractCollection({ name: "My Contract Collection" });
+collection.addRequests(navRequests).run();
 
-fs.writeFileSync("src/sample/Newman.postman_collection.json", JSON.stringify(collection.toJSON()));
+fs.writeFileSync(
+  "src/sample/Newman.postman_collection.json",
+  JSON.stringify(collection.toJSON()),
+);

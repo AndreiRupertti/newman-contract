@@ -31,6 +31,7 @@
   },
   "homepage": "https://github.com/AndreiRupertti/newman-contract#readme",
   "devDependencies": {
+    "@types/ajv": "^1.0.0",
     "@types/chai": "^4.2.7",
     "@types/jest": "^24.0.25",
     "@types/mocha": "^5.2.7",

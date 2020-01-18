@@ -11,6 +11,15 @@ const dummyPreRequestExec: ITestExec = ({ pm }) => {
     pm.setGlobalVariable('key', 'value');
 };
 
+const validContractDefinition = {
+    method: "GET",
+    name: "Valid Contract Definition",
+    endpoint: "https://some-endpoint.com/search",
+    header: { "X-Track-id": "123456"},
+    query: { q: "hello" },
+    schema: {}
+}
+
 const validRequestGET = {
     method: "GET",
     name: "Valid Get Mock",
@@ -34,5 +43,6 @@ export {
     validRequestPOST,
     validRequestGET,
     dummyTestExec,
-    dummyPreRequestExec
+    dummyPreRequestExec,
+    validContractDefinition
 }

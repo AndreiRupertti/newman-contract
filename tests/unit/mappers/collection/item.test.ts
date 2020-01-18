@@ -3,6 +3,7 @@ import { validRequestGET, validRequestPOST } from '@tests/mocks/input_request';
 import { validPostmanDummyTestEvent, validPostmanRequestGET } from '@tests/mocks/postman_request';
 import { EventTypes } from '@src/constants';
 import { buildRequest, buildEvent } from '@src/mappers';
+import { IPostmanRequestItem } from '@src/types';
 
 jest.mock('@mappers/script/event', () => ({
     __esModule: true,
@@ -18,12 +19,14 @@ describe('Mapper for Collection item', () => {
     beforeEach(jest.clearAllMocks)
     
     it('should return item for get request', () => {
-        expect(buildItem(validRequestGET)).toEqual({
+        const expectedItem: IPostmanRequestItem = {
             name: 'Valid Get Mock',
             event: [validPostmanDummyTestEvent],
             request: validPostmanRequestGET,
             response: []
-        });
+        }
+
+        expect(buildItem(validRequestGET)).toEqual(expectedItem);
     })
 
     it('should call buildEvent with type test and executable', () => {

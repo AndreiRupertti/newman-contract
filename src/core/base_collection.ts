@@ -5,33 +5,14 @@ import {
     buildItem,
 } from "@src/mappers";
 import {
-    IEvent,
+    ICollection,
+    ICollectionOptions,
     IFolder,
-    IInfo,
     IPostmanRequestItem,
-    IRequestDefinition,
 } from "@src/types";
 import newman from "newman";
 
-interface ICollection<T> {
-    readonly _info: IInfo | {};
-    _item: Array<IPostmanRequestItem | IFolder>;
-    _globals: T | null;
-    _globals_setter_event: IEvent[];
-
-    setGlobals(globals: T): ICollection<T>;
-    addFolder(folderName: string, requests: Array<IRequestDefinition<T>>): ICollection<T>;
-    addRequest(request: IRequestDefinition<T>): ICollection<T>;
-    addRequests(request: Array<IRequestDefinition<T>>): ICollection<T>;
-    toJSON(): any;
-    run(options?: any): void;
-}
-
-interface ICollectionOptions {
-    name: string;
-}
-
-const Collection = <T = {}>({ name }: ICollectionOptions): ICollection<T> => ({
+const Collection = <T= {}>({ name }: ICollectionOptions): ICollection<T> => ({
     _info: buildInfo({ name }),
     _item: [] as  Array<IPostmanRequestItem | IFolder>,
     _globals: null,

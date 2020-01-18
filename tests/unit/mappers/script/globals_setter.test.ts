@@ -9,12 +9,19 @@ describe('Mapper for Collection Event setting global variables', () => {
         jest.spyOn(uuid, 'createUUID').mockImplementation(() => fakeUUID)
     })
     it('should a pre request script with an executable setting the variables', () => {
-        const globals = { num: 5, str: 'string', fun: () => { } }
+        const globals = { num: 5, str: 'string', fun: () => { }, object: { prop: 'prop'} }
         const globalsSetter = buildGlobalSetterEvent(globals)
         expect(globalsSetter).toEqual({
             listen: EventTypes.PRE_REQUEST,
             script: {
-                exec: ['num = 5;', "str = \"string\";", "fun = () => { };", ""],
+                exec: [
+                    'num = 5;',
+                    "str = \"string\";",
+                    "fun = () => { };",
+                    "object = {",
+                    "                prop: \"prop\",",
+                    "        };",
+                    ""],
                 id: fakeUUID,
                 type: 'text/javascript'
             }

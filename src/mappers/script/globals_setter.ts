@@ -2,8 +2,16 @@ import { createUUID } from "@common/uuid";
 import { EventTypes } from "@src/constants";
 import { IEvent } from "@src/types";
 
-const getValueAttribution = (value: any) => {
+const getValueAttribution = (value: any): string => {
     if (typeof value === "string") { return `"${value}"`; }
+    if (typeof value === "object") {
+        return `{
+                ${Object
+                    .entries(value)
+                    .reduce((str, [k, v]) => str + `${k}: ` + getValueAttribution(v) + ","
+                , "")}
+        }`;
+}
     return String(value);
 };
 const LINE_BREAK_REGEX = /[\r\n]+/gm;
