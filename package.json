@@ -34,6 +34,7 @@
     "@types/ajv": "^1.0.0",
     "@types/chai": "^4.2.7",
     "@types/jest": "^24.0.25",
+    "@types/js-beautify": "^1.8.1",
     "@types/mocha": "^5.2.7",
     "@types/newman": "^3.11.1",
     "husky": "^4.0.4",
@@ -45,6 +46,7 @@
     "typescript": "^3.7.4"
   },
   "dependencies": {
+    "js-beautify": "^1.10.3",
     "newman": "^4.5.7"
   }
 }

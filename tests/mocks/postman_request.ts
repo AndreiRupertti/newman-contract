@@ -3,10 +3,10 @@ import { EventTypes } from "@src/constants";
 const validPostmanDummyTestExec = [
   "// Generated code for: test ",
   "const runTests = ({ pm }) => {",
-  "        const { test, expect } = pm;",
-  "    test(\"My dummy test\", () => {",
-  "        expect(1).to.be.eq(1);",
-  "    });",
+  "  const { test, expect } = pm;",
+  "  test(\"My dummy test\", () => {",
+  "    expect(1).to.be.eq(1);",
+  "  });",
   "}",
   "runTests({ pm });",
   ""
@@ -14,7 +14,7 @@ const validPostmanDummyTestExec = [
 const validPostmanDummyPreRequestExec = [
   "// Generated code for: prerequest ",
   "const preRequestSetup = ({ pm }) => {",
-  "        pm.setGlobalVariable('key', 'value');",
+  "  pm.setGlobalVariable('key', 'value');",
   "}",
   "preRequestSetup({ pm });",
   ""

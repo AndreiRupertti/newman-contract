@@ -1,11 +1,11 @@
 import {
     IContractGlobals, IExecutable, IRequestDefinition,
 } from "@src/types";
-
+// tslint:disable 
 const buildContractPreRequest = (schema: any): IExecutable => {
     const template = ` ({ pm }) => {
         const { variables } = pm;
-        const schemaUnderTest = ${JSON.stringify(schema)}
+        const schemaUnderTest = ${JSON.stringify(schema, null, 2)}
 
         variables.set('schemaUnderTest', JSON.stringify(schemaUnderTest));
     }
@@ -19,14 +19,13 @@ const buildContractMatcherTest = (): IExecutable<IContractGlobals> => ({ pm, con
     const AJV = require("ajv");
     const { BrokenContractError } = contractUtils;
     const schemaUnderTest = JSON.parse(variables.get("schemaUnderTest"));
-
+    
     test(`[${request.url.getPath()}] Should match contract`, () => {
         const bodyResponse = pm.response.json();
         const ajv = new AJV({logger: console, allErrors: true, verbose: true});
         const isValid = ajv.validate(schemaUnderTest, bodyResponse);
 
         if (!isValid) { throw new BrokenContractError(ajv.errors); }
-        // tslint:disable-next-line
         expect(isValid).to.be.true;
     });
 };

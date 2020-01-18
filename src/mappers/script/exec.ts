@@ -1,3 +1,4 @@
+import beautify from "@src/common/beautify";
 import { EventTypes, ExecFunctionName } from "@src/constants";
 import { IExecutable } from "@types";
 
@@ -30,7 +31,7 @@ ${ExecFunctionName[type]}(${getGlobalContext(globals)});
 
 export default <T> ({ type, exec, globals }: IExecParams<T>) => {
     const lines = exec.toString().split(LINE_BREAK_REGEX);
-    const testTemplate = buildExecTemplate({ type, lines, globals });
+    const testTemplate = beautify(buildExecTemplate({ type, lines, globals }));
     const executable =  testTemplate.split(LINE_BREAK_REGEX);
 
     return executable;

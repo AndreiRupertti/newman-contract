@@ -265,5 +265,5 @@ collection.addRequests(navRequests).run();
 
 fs.writeFileSync(
   "src/sample/Newman.postman_collection.json",
-  JSON.stringify(collection.toJSON()),
+  JSON.stringify(collection.toJSON(), null, 2),
 );

@@ -1,6 +1,7 @@
+import beautify from "@common/beautify";
 import { createUUID } from "@common/uuid";
 import { EventTypes } from "@src/constants";
-import { IEvent } from "@src/types";
+import { IEvent } from "@types";
 
 const getValueAttribution = (value: any): string => {
     if (typeof value === "string") { return `"${value}"`; }
@@ -8,8 +9,7 @@ const getValueAttribution = (value: any): string => {
         return `{
                 ${Object
                     .entries(value)
-                    .reduce((str, [k, v]) => str + `${k}: ` + getValueAttribution(v) + ","
-                , "")}
+                    .reduce((str, [k, v]) => str + `${k}: ` + getValueAttribution(v) + ",", "")}
         }`;
 }
     return String(value);
@@ -23,7 +23,7 @@ const buildGlobalsTemplate = <T> (globals: T) => {
             );
         }, "");
 
-    return template.split(LINE_BREAK_REGEX);
+    return beautify(template).split(LINE_BREAK_REGEX);
 };
 export default <T> (globals: T): IEvent => ({
     listen: EventTypes.PRE_REQUEST,

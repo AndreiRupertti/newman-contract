@@ -17,10 +17,10 @@ describe('Mapper for Collection Event setting global variables', () => {
                 exec: [
                     'num = 5;',
                     "str = \"string\";",
-                    "fun = () => { };",
+                    "fun = () => {};",
                     "object = {",
-                    "                prop: \"prop\",",
-                    "        };",
+                    "  prop: \"prop\",",
+                    "};",
                     ""],
                 id: fakeUUID,
                 type: 'text/javascript'
