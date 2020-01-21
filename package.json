@@ -7,9 +7,13 @@
   "files": [
     "lib/**/*"
   ],
+  "bin": {
+    "newman-contract": "-r tsconfig-paths/register ./lib/bin/index"
+  },
   "scripts": {
     "build": "tsc -p src/tsconfig.json",
-    "start": "npm run build && ts-node --project src/tsconfig.json -r tsconfig-paths/register lib/index",
+    "bin": "ts-node --project src/tsconfig.json -r tsconfig-paths/register lib/bin/index",
+    "start": "npm run build && npm run bin -- run './examples/*'",
     "test": " jest --config jestconfig.json",
     "lint": "tslint -p src/tsconfig.json",
     "format": "npm run lint -- --fix"
@@ -56,6 +60,8 @@
     "typescript": "^3.7.4"
   },
   "dependencies": {
+    "commander": "^4.1.0",
+    "fast-glob": "^3.1.1",
     "js-beautify": "^1.10.3",
     "newman": "^4.5.7"
   }
