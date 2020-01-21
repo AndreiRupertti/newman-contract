@@ -11,8 +11,8 @@
     "newman-contract": "-r tsconfig-paths/register ./lib/bin/index"
   },
   "scripts": {
-    "build": "tsc -p src/tsconfig.json",
-    "bin": "ts-node --project src/tsconfig.json -r tsconfig-paths/register lib/bin/index",
+    "build": "ttsc -p src/tsconfig.json",
+    "bin": "ts-node -C ttypescript --project src/tsconfig.json -r tsconfig-paths/register lib/bin/index",
     "start": "npm run build && npm run bin -- run './examples/*'",
     "test": " jest --config jestconfig.json",
     "lint": "tslint -p src/tsconfig.json",
@@ -55,8 +55,10 @@
     "jest": "^24.9.0",
     "ts-jest": "^24.3.0",
     "ts-node": "^8.5.4",
+    "ts-transformer-imports": "^0.4.3",
     "tsconfig-paths": "^3.9.0",
     "tslint": "^5.20.1",
+    "ttypescript": "^1.5.10",
     "typescript": "^3.7.4"
   },
   "dependencies": {
