@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import ContractCollection from "@core/contract/collection";
 import { ICollectionOptions } from "@src/types";
 import program from "commander";
