@@ -1,5 +1,5 @@
-import fg from "fast-glob";
-import path from "path";
+import * as fg from "fast-glob";
+import * as path from "path";
 
 const hasDefaultImport = (moduleToImport: any) => "default" in moduleToImport;
 

@@ -9,6 +9,7 @@ jest.mock('@core/contract_globals', () => ({
         contractUtils: {}
     }))
 }));
+
 jest.mock('@common/module_resolver', () => ({
     getModulesFromPattern: jest.fn(() => [{ name: 'module definition '}])
 }))
