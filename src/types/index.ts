@@ -17,15 +17,46 @@ export type IBody = ISimpleObject;
 
 export type IExecutable<T = {}> = (params: IExecParams<T>) => void;
 export type ITestExec<T = {}> = IExecutable<T>;
+export type ICallback<T> = (err: any, res: T) => void;
+
+export type IVariablesMangerPM = Pick<PostmanTypes.VariableScope, "has" | "get" | "toObject" | "set">;
 
 export interface IGlobalPostman {
     test: typeof MochaTest;
     expect: typeof ChaiExpect;
-    variables: PostmanTypes.VariableScope;
-    request: any;
-    response: { json: () => any };
+    info: IScriptInfoPM;
+    variables: IVariablesMangerPM;
+    environment: PostmanTypes.VariableScope;
+    collectionVariables: PostmanTypes.VariableScope;
+    iterationData: PostmanTypes.VariableScope;
+    globals: PostmanTypes.VariableScope;
+    request: PostmanTypes.Request;
+    response: any;
+    cookies: any;
     setGlobalVariable: (key: string, value: any) => void;
+    sendRequest(endpoint: string, callback: ICallback<any>): void;
 }
+
+export interface IScriptInfoPM {
+    eventName: string;
+    iteration: number;
+    terationCount: number;
+    requestName: string;
+    requestId: string;
+}
+
+export interface IResponsePM {
+    headers: PostmanTypes.HeaderList;
+    responseTime: number;
+    code: number;
+    json(): any;
+    text(): string;
+    reason(): string;
+}
+
+export type IExecParams<T = {}> = T & {
+    pm: IGlobalPostman,
+};
 
 export interface IInfo {
     name: string;
@@ -43,10 +74,6 @@ export interface IRequestDefinition<T = {}> {
     preRequest?: IExecutable<T>;
     schema?: any;
 }
-
-export type IExecParams<T = {}> = T & {
-    pm: IGlobalPostman,
-};
 
 export type PostmanCollection = PostmanTypes.Collection;
 export type PostmanURL = Overwrite<PostmanTypes.UrlDefinition, { query?: ISimpleObject[] }>;
@@ -73,19 +100,6 @@ export interface IEvent {
 export interface IFolder {
     name: string;
     item: IPostmanRequestItem[];
-}
-
-export interface ICollection<T = {}> {
-    readonly _info: IInfo | {};
-    _item: Array<IPostmanRequestItem | IFolder>;
-    _globals: T | null;
-    _globals_setter_event: IEvent[];
-
-    setGlobals(globals: T): ICollection<T>;
-    addFolder(folderName: string, requests: Array<IRequestDefinition<T>>): ICollection<T>;
-    addRequest(request: IRequestDefinition<T>): ICollection<T>;
-    addRequests(request: Array<IRequestDefinition<T>>): ICollection<T>;
-    toJSON(): any;
 }
 
 export type IContractGlobals<T = {}> = T & {
