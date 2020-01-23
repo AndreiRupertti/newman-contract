@@ -1,5 +1,5 @@
 import { EventTypes } from "@src/constants";
-import { BrokenContractError } from "@src/core/contract/utils";
+import { BrokenContractError } from "@src/core/contract/contract_globals";
 import { expect as ChaiExpect } from "chai";
 import { test as MochaTest } from "mocha";
 import * as PostmanTypes from "postman-collection";
@@ -86,7 +86,6 @@ export interface ICollection<T = {}> {
     addRequest(request: IRequestDefinition<T>): ICollection<T>;
     addRequests(request: Array<IRequestDefinition<T>>): ICollection<T>;
     toJSON(): any;
-    run(options?: any): void;
 }
 
 export type IContractGlobals<T = {}> = T & {
@@ -97,4 +96,8 @@ export type IContractGlobals<T = {}> = T & {
 
 export interface ICollectionOptions {
     name: string;
+}
+
+export interface IContractCollectionOptions extends Partial<ICollectionOptions> {
+    fromPattern: string | string[];
 }

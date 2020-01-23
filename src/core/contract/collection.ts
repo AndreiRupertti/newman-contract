@@ -1,22 +1,23 @@
-import Collection from "@core/base_collection";
-import { BrokenContractError } from "@core/contract/utils";
+import { getModulesFromPattern } from "@common/module_resolver";
+import getContractGlobals from "@src/core/contract/contract_globals";
+import { buildGlobalSetterEvent, buildInfo, buildItem } from "@src/mappers";
 import {
     ICollectionOptions,
-    IContractGlobals,
+    IContractCollectionOptions,
 } from "@src/types";
-// tslint:disable
 
-const getContractGlobals = <T> (): IContractGlobals<T> => ({
-    contractUtils: {
-        BrokenContractError,
-    }
-} as any);
+const toJSON = (toParse: any) => JSON.parse(
+    JSON.stringify(toParse),
+);
 
-const ContractCollection = <T = {}> (collectionOptions: ICollectionOptions) => {
-    const collection = Collection<IContractGlobals<T>>(collectionOptions);
-    collection.setGlobals(getContractGlobals());
+const ContractCollection = <T = {}> ({ fromPattern, name }: IContractCollectionOptions) => {
+    const globals = getContractGlobals<T>();
 
-    return collection;
+    return toJSON({
+        info: buildInfo({ name } as ICollectionOptions),
+        event: buildGlobalSetterEvent(globals),
+        item: getModulesFromPattern(fromPattern).map((definition) => buildItem(definition, globals)),
+    });
 };
 
 export default ContractCollection;

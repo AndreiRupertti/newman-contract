@@ -1,4 +1,5 @@
-import { BrokenContractError } from "@src/core/contract/utils";
+import getContractGlobals from "@src/core/contract/contract_globals";
+const { contractUtils: utils } = getContractGlobals()
 
 const fakeAjvErrors = [
   { keyword: "type", dataPath: ".stringProp", message: "should be string" },
@@ -19,7 +20,7 @@ const fakeAjvErrors = [
 describe("BrokenContractError", () => {
   describe("When thorwing ajv errors", () => {
     it("should build correct messages", () => {
-      expect(() => {throw new BrokenContractError(fakeAjvErrors)})
+      expect(() => {throw new utils.BrokenContractError(fakeAjvErrors)})
         .toThrowError("Errors: ["
             + "\n\tProperty \".stringProp\": should be string"
             + "\n\tMissing required property \"requiredProp\""
@@ -30,7 +31,7 @@ describe("BrokenContractError", () => {
 
   describe("When there are no errors to throw", () => {
     it("should build with empty message", () => {
-      expect(() => {throw new BrokenContractError([])}).toThrowError("");
+      expect(() => {throw new utils.BrokenContractError([])}).toThrowError("");
     });
   });
 });

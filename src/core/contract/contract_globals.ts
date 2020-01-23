@@ -1,4 +1,6 @@
-class BrokenContractError extends Error {
+import { IContractGlobals } from "@src/types";
+
+export class BrokenContractError extends Error {
     constructor(errors: any[]) {
         super();
         this.name = "Broken Contract";
@@ -31,4 +33,8 @@ class BrokenContractError extends Error {
     }
 }
 
-export { BrokenContractError };
+export default <T = {}> (): IContractGlobals<T> => ({
+    contractUtils: {
+        BrokenContractError,
+    },
+} as any);
