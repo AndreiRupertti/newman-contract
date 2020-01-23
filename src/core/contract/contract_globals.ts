@@ -1,35 +1,38 @@
 import { IContractGlobals } from "@src/types";
+import { AdditionalPropertiesParams, ErrorObject, RequiredParams } from "ajv";
 
 export class BrokenContractError extends Error {
-    constructor(errors: any[]) {
+    constructor(errors: ErrorObject[]) {
         super();
         this.name = "Broken Contract";
         this.message = this.buildMessage(errors);
     }
 
-    private buildMessage(errors: any[]) {
+    private buildMessage(errors: ErrorObject[]) {
         if (!errors.length) { return ""; }
         const allErrors = errors.map((error) => `${this.getErrorMessage(error)}\n`);
         const uniqueErrors = [...new Set(allErrors)];
         return `Errors: [\n\t${uniqueErrors.join("\t")}]`;
     }
 
-    private getErrorMessage(error: any): string {
+    private getErrorMessage(error: ErrorObject): string {
         if (error.keyword === "additionalProperties") { return this.unkownPropertyMessage(error); }
         if (error.keyword === "type") { return  this.invalidTypeMessage(error); }
         if (error.keyword === "required") { return this.missingRequiredPropertyMessage(error); }
 
-        return error.message;
+        return error.message || "";
     }
 
-    private unkownPropertyMessage(error: any) {
-        return `Unkown property: "${error.params.additionalProperty}" (not in schema)`;
+    private unkownPropertyMessage(error: ErrorObject) {
+        const property  = (error.params as AdditionalPropertiesParams).additionalProperty;
+        return `Unkown property: "${property}" (not in schema)`;
     }
-    private invalidTypeMessage(error: any) {
+    private invalidTypeMessage(error: ErrorObject) {
         return `Property "${error.dataPath}": ${error.message}`;
     }
-    private missingRequiredPropertyMessage(error: any) {
-        return `Missing required property "${error.params.missingProperty}"`;
+    private missingRequiredPropertyMessage(error: ErrorObject) {
+        const property = (error.params as RequiredParams).missingProperty;
+        return `Missing required property "${property}"`;
     }
 }
 
