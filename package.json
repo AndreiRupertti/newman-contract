@@ -7,13 +7,9 @@
   "files": [
     "lib/**/*"
   ],
-  "bin": {
-    "newman-contract": "lib/bin/index.js"
-  },
   "scripts": {
-    "build": "ttsc -p src/tsconfig.json",
-    "bin": "ts-node -C ttypescript --project src/tsconfig.json -r tsconfig-paths/register lib/bin/index",
-    "start": "npm run build && npm run bin -- run './examples/*'",
+    "build-clean": "rm -rf lib/",
+    "build": "npm run build-clean && ttsc -p src/tsconfig.json",
     "test": " jest --config jestconfig.json",
     "lint": "tslint -p src/tsconfig.json",
     "format": "npm run lint -- --fix"
@@ -29,10 +25,12 @@
     "url": "git+https://github.com/AndreiRupertti/newman-contract.git"
   },
   "keywords": [
+    "test",
     "contract",
     "newman",
     "newman-contract",
     "contract-testing",
+    "api",
     "api-testing",
     "postman",
     "postman-testing",
@@ -63,9 +61,10 @@
     "typescript": "^3.7.4"
   },
   "dependencies": {
-    "commander": "^4.1.0",
     "fast-glob": "^3.1.1",
-    "js-beautify": "^1.10.3",
-    "newman": "^4.5.7"
+    "js-beautify": "^1.10.3"
+  },
+  "peerDependencies": {
+    "newman": "4.x"
   }
 }
