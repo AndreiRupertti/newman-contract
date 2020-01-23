@@ -1,4 +1,4 @@
-import getContractGlobals from "@src/core/contract/contract_globals";
+import getContractGlobals from "@core/contract_globals";
 const { contractUtils: utils } = getContractGlobals()
 
 const fakeAjvErrors = [

@@ -1,5 +1,5 @@
+import { BrokenContractError } from "@core/contract_globals";
 import { EventTypes } from "@src/constants";
-import { BrokenContractError } from "@src/core/contract/contract_globals";
 import { expect as ChaiExpect } from "chai";
 import { test as MochaTest } from "mocha";
 import * as PostmanTypes from "postman-collection";

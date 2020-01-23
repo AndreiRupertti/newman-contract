@@ -1,5 +1,5 @@
 import { getModulesFromPattern } from "@common/module_resolver";
-import getContractGlobals from "@src/core/contract/contract_globals";
+import getContractGlobals from "@core/contract_globals";
 import { buildGlobalSetterEvent, buildInfo, buildItem } from "@src/mappers";
 import {
     ICollectionOptions,

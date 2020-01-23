@@ -1,4 +1,4 @@
-import ContractDefinition from '@src/core/contract/definition';
+import ContractDefinition from '@core/definition';
 import { validContractDefinition } from '@tests/mocks/input_request';
 import mochaMock from '@tests/mocks/mocha';
 import Ajv from 'ajv';

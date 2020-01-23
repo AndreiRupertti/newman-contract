@@ -1,10 +1,9 @@
-import contractGlobals from '@src/core/contract/contract_globals'
-import ContractCollection from '@core/contract/collection'
+import ContractCollection from '@core/collection'
 import { buildInfo, buildGlobalSetterEvent, buildItem } from '@src/mappers';
 import { validPostmanRequestItemGET, validPostmanDummyPreRequestEvent } from '@tests/mocks/postman_request';
 
 
-jest.mock('@src/core/contract/contract_globals', () => ({
+jest.mock('@core/contract_globals', () => ({
     __esModule: true,
     default: jest.fn(() => ({
         contractUtils: {}

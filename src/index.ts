@@ -1,5 +1,5 @@
-import ContractCollection from "@core/contract/collection";
-import ContractDefinition from "@core/contract/definition";
+import ContractCollection from "@core/collection";
+import ContractDefinition from "@core/definition";
 
 export {
   ContractCollection,
