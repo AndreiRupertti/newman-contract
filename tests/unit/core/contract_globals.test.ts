@@ -14,6 +14,10 @@ const fakeAjvErrors = [
     dataPath:  ".",
     params: { additionalProperty: "unkownProp" },
     message: "should NOT have additional properties"
+  },
+  {
+    keyword: "invalid message",
+    dataPath:  ".",
   }
 ];
 
@@ -25,6 +29,7 @@ describe("BrokenContractError", () => {
             + "\n\tProperty \".stringProp\": should be string"
             + "\n\tMissing required property \"requiredProp\""
             + "\n\tUnkown property: \"unkownProp\" (not in schema)"
+            + "\n\t"
         + "\n]");
     });
   });

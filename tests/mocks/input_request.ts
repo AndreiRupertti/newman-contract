@@ -26,7 +26,8 @@ const validRequestGET = {
     endpoint: "https://some-endpoint.com/search",
     header: { "X-Track-id": "123456"},
     query: { q: "hello" },
-    test: dummyTestExec
+    test: dummyTestExec,
+    preRequest: dummyPreRequestExec
 }
 
 const validRequestPOST = {
@@ -36,7 +37,8 @@ const validRequestPOST = {
     header: { "X-Track-id": "123456"},
     query: { q: "hello" },
     body: { "bodyInfo": "someInfo" },
-    test: dummyTestExec
+    test: dummyTestExec,
+    preRequest: dummyPreRequestExec
 }
 
 export {
