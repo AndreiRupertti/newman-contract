@@ -10,7 +10,8 @@
   "scripts": {
     "build-clean": "rm -rf lib/",
     "build": "npm run build-clean && ttsc -p src/tsconfig.json",
-    "test": " jest --config jestconfig.json",
+    "test": "jest --config jestconfig.json",
+    "coverage": "npm run test -- --coverage",
     "lint": "tslint -p src/tsconfig.json",
     "format": "npm run lint -- --fix"
   },
