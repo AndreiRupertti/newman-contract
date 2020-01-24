@@ -80,7 +80,7 @@ Parse the given contract object to a contract definition, building a postman tes
 - `headers (optional)`: JSON Object containing all request headers
 - `body (optional)`: JSON Object containing request body data
 
-<br>
+
 #### `ContractCollection(Object options) -> JSON Object`
 
 Finds all Contract Definitions and builds a postman collection out of it.

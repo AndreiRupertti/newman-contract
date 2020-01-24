@@ -1,4 +1,4 @@
-import { ITestExec, IRequestDefinition } from "@types";
+import { IRequestDefinition, ITestExec } from "@types";
 
 const dummyTestExec: ITestExec = ({ pm }) => {
     const { test, expect } = pm;
