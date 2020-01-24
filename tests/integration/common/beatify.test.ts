@@ -1,13 +1,13 @@
 import beautify from "@src/common/beautify";
 
 const uglyCode: any = `
-    const   fun =  (a,    b) => { 
+    const   fun =  (a,    b) => {
         return
          { b : {
                  c:
- a   } 
+ a   }
 }}
-`
+`;
 
 const expectedCodeResult = `const fun = (a, b) => {
   return {
@@ -16,9 +16,9 @@ const expectedCodeResult = `const fun = (a, b) => {
     }
   }
 }
-`
-describe('Beatify', () => {
-    it('should format code as expected', () => {
-        expect(beautify(uglyCode)).toBe(expectedCodeResult)
-    })
-})
+`;
+describe("Beatify", () => {
+    it("should format code as expected", () => {
+        expect(beautify(uglyCode)).toBe(expectedCodeResult);
+    });
+});

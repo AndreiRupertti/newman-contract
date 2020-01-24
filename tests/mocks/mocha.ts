@@ -1,24 +1,24 @@
 const mochaChainProperties = [
-    'to',
-    'be',
-    'eq'
-]
+    "to",
+    "be",
+    "eq",
+];
 
 const mockChain = () => ({
     to: {
         be: {
-            eq: jest.fn()
-        }
-    }
+            eq: jest.fn(),
+        },
+    },
 });
 
 const mochaMock = () => {
-    const mock = mockChain()
+    const mock = mockChain();
     return {
         _mock: mock,
         test: jest.fn((name: string, callback: () => void) => name && callback()),
-        expect: jest.fn().mockReturnValue(mock)
-    }
-}
+        expect: jest.fn().mockReturnValue(mock),
+    };
+};
 
 export default mochaMock;

@@ -1,8 +1,9 @@
 import {
-    IContractGlobals, IExecutable, IRequestDefinition,
+    IContractDefinition, IContractGlobals, IContractSchema, IExecutable, IRequestDefinition,
 } from "@src/types";
+
 // tslint:disable 
-const buildContractPreRequest = (schema: any): IExecutable => {
+const buildContractPreRequest = (schema: IContractSchema): IExecutable => {
     const template = ` ({ pm }) => {
         const { variables } = pm;
         const schemaUnderTest = ${JSON.stringify(schema, null, 2)}
@@ -30,7 +31,7 @@ const buildContractMatcherTest = (): IExecutable<IContractGlobals> => ({ pm, con
     });
 };
 
-const ContractDefinition = (request: IRequestDefinition) => ({
+const ContractDefinition = (request: IContractDefinition): IRequestDefinition<IContractGlobals> => ({
     ...request,
     test: buildContractMatcherTest(),
     preRequest: buildContractPreRequest(request.schema),

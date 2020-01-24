@@ -1,7 +1,7 @@
 {
 	"extends": "../tsconfig-base",
 	"compilerOptions": {
-		"types": ["jest"]
+		"types": ["jest"],
 	},
 	"include": ["./"]
 }

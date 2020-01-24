@@ -1,14 +1,14 @@
-import { ITestExec } from '@types'
+import { ITestExec } from "@types";
 
 const dummyTestExec: ITestExec = ({ pm }) => {
     const { test, expect } = pm;
     test("My dummy test", () => {
         expect(1).to.be.eq(1);
-    })
+    });
 };
 
 const dummyPreRequestExec: ITestExec = ({ pm }) => {
-    pm.setGlobalVariable('key', 'value');
+    pm.setGlobalVariable("key", "value");
 };
 
 const validContractDefinition = {
@@ -17,8 +17,8 @@ const validContractDefinition = {
     endpoint: "https://some-endpoint.com/search",
     header: { "X-Track-id": "123456"},
     query: { q: "hello" },
-    schema: {}
-}
+    schema: {},
+};
 
 const validRequestGET = {
     method: "GET",
@@ -27,8 +27,8 @@ const validRequestGET = {
     header: { "X-Track-id": "123456"},
     query: { q: "hello" },
     test: dummyTestExec,
-    preRequest: dummyPreRequestExec
-}
+    preRequest: dummyPreRequestExec,
+};
 
 const validRequestPOST = {
     method: "POST",
@@ -36,15 +36,15 @@ const validRequestPOST = {
     endpoint: "https://some-endpoint.com/search",
     header: { "X-Track-id": "123456"},
     query: { q: "hello" },
-    body: { "bodyInfo": "someInfo" },
+    body: { bodyInfo: "someInfo" },
     test: dummyTestExec,
-    preRequest: dummyPreRequestExec
-}
+    preRequest: dummyPreRequestExec,
+};
 
 export {
     validRequestPOST,
     validRequestGET,
     dummyTestExec,
     dummyPreRequestExec,
-    validContractDefinition
-}
+    validContractDefinition,
+};

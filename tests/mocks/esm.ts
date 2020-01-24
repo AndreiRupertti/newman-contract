@@ -1,5 +1,5 @@
-jest.mock('esm', () => {
+jest.mock("esm", () => {
     return jest.fn(() => {
         return require;
-    })
+    });
 });

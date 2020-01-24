@@ -1,3 +1,3 @@
 export default {
-    name: 'Exemple of esModule'
-}
+    name: "Exemple of esModule",
+};

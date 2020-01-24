@@ -1,6 +1,7 @@
 import { BrokenContractError } from "@core/contract_globals";
 import { EventTypes } from "@src/constants";
 import { expect as ChaiExpect } from "chai";
+import { JSONSchema6, JSONSchema7  } from "json-schema";
 import { test as MochaTest } from "mocha";
 import * as PostmanTypes from "postman-collection";
 
@@ -72,7 +73,18 @@ export interface IRequestDefinition<T = {}> {
     body?: IBody;
     test?: IExecutable<T>;
     preRequest?: IExecutable<T>;
-    schema?: any;
+}
+
+export type IContractSchema = JSONSchema6 | JSONSchema7;
+
+export interface IContractDefinition {
+    method: string;
+    name: string;
+    endpoint: string;
+    header?: IHeader;
+    query?: IQuery;
+    body?: IBody;
+    schema: IContractSchema;
 }
 
 export type PostmanCollection = PostmanTypes.Collection;
@@ -108,11 +120,8 @@ export type IContractGlobals<T = {}> = T & {
     },
 };
 
-export interface ICollectionOptions {
-    name: string;
-    exportToPath: string;
-}
-
-export interface IContractCollectionOptions extends Partial<ICollectionOptions> {
+export interface IContractCollectionOptions {
+    name?: string;
     fromPattern: string | string[];
+    exportToPath?: string;
 }
