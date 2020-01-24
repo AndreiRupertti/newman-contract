@@ -64,8 +64,26 @@ export interface IInfo {
     schema: string;
 }
 
+export type HTTPMethods =
+"GET"|
+"POST"|
+"PUT"|
+"PATCH" |
+"DELETE"|
+"COPY"|
+"HEAD"|
+"OPTIONS"|
+"LINK"|
+"UNLINK"|
+"PURGE"|
+"PURGE"|
+"LOCK"|
+"UNLOCK"|
+"PROPFIND"|
+"VIEW";
+
 export interface IRequestDefinition<T = {}> {
-    method: string;
+    method: HTTPMethods;
     name: string;
     endpoint: string;
     header?: IHeader;
@@ -78,7 +96,7 @@ export interface IRequestDefinition<T = {}> {
 export type IContractSchema = JSONSchema6 | JSONSchema7;
 
 export interface IContractDefinition {
-    method: string;
+    method: HTTPMethods;
     name: string;
     endpoint: string;
     header?: IHeader;
