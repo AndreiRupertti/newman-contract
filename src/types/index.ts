@@ -110,6 +110,7 @@ export type IContractGlobals<T = {}> = T & {
 
 export interface ICollectionOptions {
     name: string;
+    exportToPath: string;
 }
 
 export interface IContractCollectionOptions extends Partial<ICollectionOptions> {

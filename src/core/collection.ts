@@ -5,19 +5,23 @@ import {
     ICollectionOptions,
     IContractCollectionOptions,
 } from "@src/types";
+import writeToFile from "./write_file";
 
 const toJSON = (toParse: any) => JSON.parse(
-    JSON.stringify(toParse),
+    JSON.stringify(toParse, null, 2),
 );
 
-const ContractCollection = <T = {}> ({ fromPattern, name }: IContractCollectionOptions) => {
+const ContractCollection = <T = {}> ({ fromPattern, name, exportToPath }: IContractCollectionOptions) => {
     const globals = getContractGlobals<T>();
-
-    return toJSON({
-        info: buildInfo({ name } as ICollectionOptions),
+    const contractCollection = toJSON({
+        info: buildInfo({ name }),
         event: buildGlobalSetterEvent(globals),
         item: getModulesFromPattern(fromPattern).map((definition) => buildItem(definition, globals)),
     });
+
+    if (exportToPath) { writeToFile(exportToPath, contractCollection); }
+
+    return contractCollection;
 };
 
 export default ContractCollection;

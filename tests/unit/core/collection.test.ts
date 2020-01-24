@@ -1,7 +1,10 @@
 import ContractCollection from '@core/collection'
+import writeToFile from '@core/write_file'
 import { buildInfo, buildGlobalSetterEvent, buildItem } from '@src/mappers';
 import { validPostmanRequestItemGET, validPostmanDummyPreRequestEvent } from '@tests/mocks/postman_request';
 
+
+jest.mock('@core/write_file', () => jest.fn())
 
 jest.mock('@core/contract_globals', () => ({
     __esModule: true,
@@ -40,6 +43,11 @@ describe('Contract Collection', () => {
                 { name: 'module definition '},
                 { contractUtils: { } }
             )
+        });
+
+        it('should write to file when a exportToPath value is given', () => {
+            const collection = ContractCollection({ fromPattern: '*', exportToPath: './path/file.json'})
+            expect(writeToFile).toBeCalledWith('./path/file.json', collection)
         });
 
         it('should return an instace of base collection', () => {
