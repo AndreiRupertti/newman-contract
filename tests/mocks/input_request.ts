@@ -1,4 +1,4 @@
-import { ITestExec } from "@types";
+import { ITestExec, IRequestDefinition } from "@types";
 
 const dummyTestExec: ITestExec = ({ pm }) => {
     const { test, expect } = pm;
@@ -20,7 +20,7 @@ const validContractDefinition = {
     schema: {},
 };
 
-const validRequestGET = {
+const validRequestGET: IRequestDefinition = {
     method: "GET",
     name: "Valid Get Mock",
     endpoint: "https://some-endpoint.com/search",
@@ -30,7 +30,7 @@ const validRequestGET = {
     preRequest: dummyPreRequestExec,
 };
 
-const validRequestPOST = {
+const validRequestPOST: IRequestDefinition = {
     method: "POST",
     name: "Valid POST Mock",
     endpoint: "https://some-endpoint.com/search",
