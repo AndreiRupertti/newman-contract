@@ -1,8 +1,8 @@
+// tslint:disable: no-unused-expression
 import {
     IContractDefinition, IContractGlobals, IContractSchema, IExecutable, IRequestDefinition,
 } from "@src/types";
 
-// tslint:disable 
 const buildContractPreRequest = (schema: IContractSchema): IExecutable => {
     const template = ` ({ pm }) => {
         const { variables } = pm;
@@ -20,7 +20,7 @@ const buildContractMatcherTest = (): IExecutable<IContractGlobals> => ({ pm, con
     const AJV = require("ajv");
     const { BrokenContractError } = contractUtils;
     const schemaUnderTest = JSON.parse(variables.get("schemaUnderTest"));
-    
+
     test(`[${request.url.getPath()}] Should match contract`, () => {
         const bodyResponse = pm.response.json();
         const ajv = new AJV({logger: console, allErrors: true, verbose: true});

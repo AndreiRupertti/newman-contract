@@ -12,7 +12,7 @@
     "build": "npm run build-clean && ttsc -p src/tsconfig.json",
     "test": "jest --config jestconfig.json",
     "coverage": "npm run test -- --coverage",
-    "lint": "tslint -p src/tsconfig.json",
+    "lint": "tslint -p ./tsconfig-base.json",
     "format": "npm run lint -- --fix"
   },
   "husky": {
