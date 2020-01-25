@@ -1,6 +1,6 @@
 {
   "name": "newman-contract",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A helper for contract testing using newman",
   "main": "lib/index",
   "types": "lib/types/index.d.ts",
