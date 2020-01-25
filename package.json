@@ -48,6 +48,7 @@
     "@types/chai": "^4.2.7",
     "@types/jest": "^24.0.25",
     "@types/js-beautify": "^1.8.1",
+    "@types/json-schema": "^7.0.4",
     "@types/mocha": "^5.2.7",
     "@types/newman": "^3.11.1",
     "@types/node": "^13.1.8",
@@ -62,7 +63,6 @@
     "typescript": "^3.7.4"
   },
   "dependencies": {
-    "@types/json-schema": "^7.0.4",
     "esm": "3.2.25",
     "fast-glob": "^3.1.1",
     "js-beautify": "^1.10.3"
