@@ -1,3 +1,15 @@
 language: node_js
 node_js:
   - 10
+script:
+  - npm run lint
+  - npm run coverage
+before_deploy:
+  - npm run build
+deploy:
+  provider: npm
+  email: "$NPM_EMAIL"
+  api_key: "$NPM_API_TOKEN"
+  skip_cleanup: true
+  on:
+    branch: release
