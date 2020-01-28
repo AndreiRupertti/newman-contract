@@ -143,3 +143,8 @@ export interface IContractCollectionOptions {
     fromPattern: string | string[];
     exportToPath?: string;
 }
+
+export type ContractCollectionBuilder = (options: IContractCollectionOptions) => PostmanTypes.CollectionDefinition;
+export type ContractDefinitionBuilder = (options: IContractDefinition) => IRequestDefinition<IContractGlobals>;
+export declare const ContractCollection: ContractCollectionBuilder;
+export declare const ContractDefinition: ContractDefinitionBuilder;

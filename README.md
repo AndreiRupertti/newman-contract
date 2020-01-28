@@ -36,7 +36,7 @@ const baseUrl = "https://my-api.com"
 module.exports = ContractDefinition({
   method: "GET",
   endpoint: `${baseUrl}/search`,
-  params: { query: 'my term' }
+  query: { query: 'my term' }
   schema: {
     type: "object",
     properties: {
@@ -73,10 +73,10 @@ Parse the given contract object to a contract definition, building a postman tes
 
 ##### contract
 - `method`: HTTP method
-- `endpoint`: endpoint to wich the request is made (accepts encoded params)
+- `endpoint`: endpoint to wich the request is made (accepts encoded query)
 - `schema`: response schema to match
 - `name (optional)`: Name for the especific test
-- `params (optinal)`: JSON Object containing all request params (priority over encoded params)
+- `query (optinal)`: JSON Object containing all request query (priority over encoded query)
 - `headers (optional)`: JSON Object containing all request headers
 - `body (optional)`: JSON Object containing request body data
 
