@@ -1,6 +1,6 @@
 // tslint:disable: no-unused-expression
 import {
-    IContractDefinition, IContractGlobals, IContractSchema, IExecutable, IRequestDefinition,
+    ContractDefinitionBuilder, IContractGlobals, IContractSchema, IExecutable,
 } from "@src/types";
 
 const buildContractPreRequest = (schema: IContractSchema): IExecutable => {
@@ -31,7 +31,7 @@ const buildContractMatcherTest = (): IExecutable<IContractGlobals> => ({ pm, con
     });
 };
 
-const ContractDefinition = (request: IContractDefinition): IRequestDefinition<IContractGlobals> => ({
+const ContractDefinition: ContractDefinitionBuilder = (request) => ({
     ...request,
     test: buildContractMatcherTest(),
     preRequest: buildContractPreRequest(request.schema),

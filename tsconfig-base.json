@@ -9,7 +9,7 @@
       "esModuleInterop": true,
       "moduleResolution": "Node",
       "baseUrl": ".",
-      "plugins": [{ "transform": "ts-transformer-imports" }],
+      "plugins": [{ "transform": "@zerollup/ts-transform-paths" }],
       "paths": {
         "@src/*": ["src/*"],
         "@common/*": ["src/common/*"],
