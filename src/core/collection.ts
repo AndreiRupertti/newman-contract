@@ -14,7 +14,7 @@ const ContractCollection: ContractCollectionBuilder = ({ fromPattern, name, expo
     const globals = getContractGlobals();
     const contractCollection = toJSON({
         info: buildInfo({ name }),
-        event: buildGlobalSetterEvent(globals),
+        event: [buildGlobalSetterEvent(globals)],
         item: getModulesFromPattern(fromPattern).map((definition) => buildItem(definition, globals)),
     });
 
