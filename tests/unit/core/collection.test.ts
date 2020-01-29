@@ -54,7 +54,7 @@ describe("Contract Collection", () => {
             expect(contractCollection).toEqual({
                 info: { name: "Collection info" },
                 item: [validPostmanRequestItemGET],
-                event: validPostmanDummyPreRequestEvent,
+                event: [validPostmanDummyPreRequestEvent],
             });
         });
     });
