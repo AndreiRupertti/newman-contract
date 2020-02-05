@@ -6,13 +6,11 @@ With `newman-contract` you dont need to relly on postman to read or write your c
 
 If you are not familiar with Consumer-Driven contract tests using Postman, I recommend you to read [this article](https://medium.com/better-practices/consumer-driven-contract-testing-using-postman-f3580dba5370).
 
-> :warning: This package is in early development and can still have major changes
-
 #### Features:
 
 - Creates a boilerplate collection for contract testing
 - Human readable error messages
-- Easy sorce control over your contracts
+- Easy source control over your contracts
 - Able to use `process.env` to build collections
 - Support for esModules
 - Typescipt definitions
@@ -88,4 +86,4 @@ Finds all Contract Definitions and builds a postman collection out of it.
 ##### options
 - `fromPattern`: Glob pattern to find the contract definitions
 - `name (optional)`: Custom name for collection (Default: 'Contract Collection')
-- `exportToPath (optional)`: File path to wich the final collection will be exported to
+- `exportToPath (optional)`: File path to which the final collection will be exported to
