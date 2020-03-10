@@ -1,4 +1,3 @@
-// @ts-ignore
 import { js as format } from "js-beautify";
 
 const formatterOptions: JsBeautifyOptions = {

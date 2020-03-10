@@ -11,6 +11,13 @@ export interface ISimpleObject {
     [key: string]: string | number | boolean | ISimpleObject[] | null;
 }
 
+export interface IValidateObject {
+    [key: string]: {
+        validate: Array<(value: any) => boolean>;
+        error: string;
+    };
+}
+
 export type IParam = ISimpleObject & { type?: string; };
 export type IHeader = ISimpleObject;
 export type IQuery = ISimpleObject;
