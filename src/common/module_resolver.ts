@@ -13,8 +13,9 @@ const fileToModule = (filePath: string) => {
     try {
         const moduleToImport = esmRequire(resolvedPath);
         return resolveDefaultImport(moduleToImport);
-    } catch (e) {
-        throw new Error(`cannot find module at ${resolvedPath}`);
+    } catch (error) {
+        if (error.code === "MODULE_NOT_FOUND") { throw new Error(`Cannot find module at "${resolvedPath}"`); }
+        throw error;
     }
 };
 

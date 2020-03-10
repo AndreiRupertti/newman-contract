@@ -1,0 +1,15 @@
+{
+  "name": "contracts-with",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test:contract": "node run"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "newman": "^4.6.0",
+    "newman-contract": "file:../.."
+  }
+}
