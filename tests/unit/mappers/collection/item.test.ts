@@ -36,6 +36,11 @@ describe("Mapper for Collection item", () => {
         expect(buildEvent).toBeCalledWith({ type: EventTypes.TEST, exec: validRequestGET.test});
     });
 
+    it("should recursively create folders based on file path", () => {
+        buildItem(validRequestGET);
+        expect(buildEvent).toBeCalledWith({ type: EventTypes.TEST, exec: validRequestGET.test});
+    });
+
     it("should call buildRequest with GET request items", () => {
         buildItem(validRequestGET);
         expect(buildRequest).toBeCalledWith({

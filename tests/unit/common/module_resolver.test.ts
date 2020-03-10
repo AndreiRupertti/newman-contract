@@ -21,6 +21,6 @@ describe("Module Mapper", () => {
     it("should throw error when module is not found", () => {
         resolvePathMock = "invalid_path/";
         expect(() => getModulesFromPattern(["**/fixtures/modules/*"]))
-            .toThrowError("cannot find module at invalid_path/esModule.ts");
+            .toThrowError('Cannot find module at "invalid_path/esModule.ts"');
     });
 });
