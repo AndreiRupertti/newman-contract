@@ -1,6 +1,7 @@
 // tslint:disable: no-unused-expression
+import { isMapObject, isNonEmptyString, isValidURL, validator } from "@src/common/validator";
 import {
-    ContractDefinitionBuilder, IContractGlobals, IContractSchema, IExecutable,
+    ContractDefinitionBuilder, IContractGlobals, IContractSchema, IExecutable, IValidateObject,
 } from "@src/types";
 
 const buildContractPreRequest = (schema: IContractSchema): IExecutable => {
@@ -31,10 +32,42 @@ const buildContractMatcherTest = (): IExecutable<IContractGlobals> => ({ pm, con
     });
 };
 
-const ContractDefinition: ContractDefinitionBuilder = (request) => ({
-    ...request,
-    test: buildContractMatcherTest(),
-    preRequest: buildContractPreRequest(request.schema),
-});
+const validateObject: IValidateObject = {
+    method: {
+        validate: [isNonEmptyString],
+        error: "Request method should be a valid HTTP method (eg. GET, POST, PUT, ...).",
+    },
+    name: {
+        validate: [isNonEmptyString],
+        error: "Route name should be a non empty string.",
+    },
+    endpoint: {
+        validate: [isNonEmptyString, isValidURL],
+        error: '"endpoint" should be a valid url (eg. "https://my-endpoint.com/path").',
+    },
+    header: {
+        validate: [isMapObject],
+        error: '"headers" should be an simple map object (eg. "{ [key: string]: string | number | boolean }"',
+    },
+    query: {
+        validate: [isMapObject],
+        error: '"query" should be an simple map object (eg. "{ [key: string]: string | number | boolean }"',
+    },
+    body: {
+        validate: [isMapObject],
+        error: '"body" should be an simple map object (eg. "{ [key: string]: string | number | boolean | null }"',
+    },
+};
+
+const ContractDefinition: ContractDefinitionBuilder = (request) => {
+    const throwUnlessValid = validator(validateObject);
+    throwUnlessValid(request);
+
+    return {
+        ...request,
+        test: buildContractMatcherTest(),
+        preRequest: buildContractPreRequest(request.schema),
+    };
+};
 
 export default ContractDefinition;
