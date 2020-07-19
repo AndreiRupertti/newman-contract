@@ -10,6 +10,6 @@
   "license": "ISC",
   "dependencies": {
     "newman": "^4.6.0",
-    "newman-contract": "file:../.."
+    "newman-contract": "^1.0.3"
   }
 }
