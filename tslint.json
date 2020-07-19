@@ -1,6 +1,5 @@
 {
     "extends": ["tslint:recommended"],
     "rules": {
-        "object-literal-sort-keys": [true, "match-declaration-order-only"]
     }
 }

@@ -1,11 +1,11 @@
 import { js as format } from "js-beautify";
 
-const formatterOptions: JsBeautifyOptions = {
-  indent_size: 2,
+const formatterOptions: JSBeautifyOptions = {
   eol: "\n",
-  preserve_newlines: true,
-  brace_style: "collapse-preserve-inline",
   end_with_newline: true,
+  indent_size: 2,
+  preserve_newlines: true,
+  brace_style: "preserve-inline",
 };
 
 export default (code: string) => {
