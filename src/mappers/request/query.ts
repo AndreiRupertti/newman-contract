@@ -1,7 +1,10 @@
-import { IQuery, ISimpleObject} from "@types";
-import { QueryParamDefinition } from "postman-collection";
+import { IQuery } from "@types";
 
-export default (queryEntries: IQuery | Array<[string, string]>) => {
-    const entries =  Array.isArray(queryEntries) ? queryEntries : Object.entries(queryEntries);
-    return entries.map(([key, value]) => ({ key, value }));
+type ITupla = [string, string];
+
+export default (queryEntries: IQuery | ITupla[]) => {
+  const entries = Array.isArray(queryEntries)
+    ? queryEntries
+    : Object.entries(queryEntries);
+  return entries.map(([key, value]) => ({ key, value }));
 };
